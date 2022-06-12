@@ -1,12 +1,6 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from "./components/HelloWorld.vue";
-</script>
-
 <template>
-  <div class="flex flex-col items-center">
-    <div
+  <div class="bg-slate-50">
+    <!-- <div
       class="
         text-3xl
         font-bold
@@ -23,7 +17,7 @@ import HelloWorld from "./components/HelloWorld.vue";
       <div class="mr-4" @click="changeLocales('ru')">Ru</div>
       <div @click="changeLocales('en')">En</div>
     </div>
-    <div>{{ text }}</div>
+    <div>{{ text }}</div> -->
     <router-view></router-view>
   </div>
 </template>
@@ -45,6 +39,6 @@ export default {
 
 <style>
 #app {
-  margin-top: 60px;
+  /* margin-top: 60px; */
 }
 </style>

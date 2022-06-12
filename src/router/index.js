@@ -1,7 +1,28 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
-  { path: "/hello", component: () => import("../components/HelloWorld.vue") },
+  {
+    path: "/",
+    name: "Hello",
+    component: () => import("../views/Hello.vue"),
+  },
+  {
+    path: "/:id",
+    name: "Club",
+    component: () => import("../views/Club.vue"),
+    children: [
+      {
+        path: "/rating",
+        name: "Rating",
+        component: () => import("../views/Rating.vue"),
+      },
+      {
+        path: "/history",
+        name: "History",
+        component: () => import("../views/History.vue"),
+      },
+    ],
+  },
 ];
 
 const router = createRouter({
