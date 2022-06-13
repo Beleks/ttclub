@@ -1,5 +1,5 @@
 <template>
-  <div class="py-7 h-screen text-center">
+  <div class="py-7">
     <div class="mb-7 flex flex-1 flex-col items-center">
       <div class="font-medium text-2xl">
         Club <span class="text-indigo-500">TT</span>

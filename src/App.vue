@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-slate-50">
+  <div class="bg-slate-50 h-screen text-center">
     <!-- <div
       class="
         text-3xl

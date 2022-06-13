@@ -5,7 +5,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  mounted() {
+    console.log("club was mounted");
+  },
+};
 </script>
 
 <style>

@@ -23,6 +23,15 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/404",
+    name: "NotFound",
+    component: () => import("../views/NotFound.vue"),
+  },
+  {
+    path: "/:catchAll(.*)",
+    redirect: "/404",
+  },
 ];
 
 const router = createRouter({
