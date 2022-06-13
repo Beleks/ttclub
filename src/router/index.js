@@ -9,15 +9,18 @@ const routes = [
   {
     path: "/:id",
     name: "Club",
+    redirect: () => {
+      return { name: "Rating" };
+    },
     component: () => import("../views/Club.vue"),
     children: [
       {
-        path: "/rating",
+        path: "rating",
         name: "Rating",
         component: () => import("../views/Rating.vue"),
       },
       {
-        path: "/history",
+        path: "history",
         name: "History",
         component: () => import("../views/History.vue"),
       },
