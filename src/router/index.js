@@ -1,30 +1,57 @@
 import { createRouter, createWebHistory } from "vue-router";
 
+function widthCheck(to) {
+  let width = window.innerWidth;
+  if (to.matched[0].name == "Mobile" && width > 800) {
+    // How change only matched[0] from m to d ?
+    return { name: "Desktop" };
+  } else if (to.matched[0].name == "Desktop" && width < 800) {
+    return { name: "Mobile" };
+  }
+}
+
 const routes = [
   {
-    path: "/",
-    name: "Hello",
-    component: () => import("../views/Hello.vue"),
-  },
-  {
-    path: "/:id",
-    name: "Club",
+    path: "/m",
+    name: "Mobile",
+    beforeEnter: [widthCheck],
     redirect: () => {
-      return { name: "Rating" };
+      return { name: "Hello" };
     },
-    component: () => import("../views/Club.vue"),
+    component: () => import("../views/mobile/Mobile.vue"),
     children: [
       {
-        path: "rating",
-        name: "Rating",
-        component: () => import("../views/Rating.vue"),
+        path: "hello",
+        name: "Hello",
+        component: () => import("../views/Hello.vue"),
       },
       {
-        path: "history",
-        name: "History",
-        component: () => import("../views/History.vue"),
+        path: ":id",
+        name: "Club",
+        redirect: () => {
+          return { name: "Rating" };
+        },
+        component: () => import("../views/mobile/Club.vue"),
+        children: [
+          {
+            path: "rating",
+            name: "Rating",
+            component: () => import("../views/Rating.vue"),
+          },
+          {
+            path: "history",
+            name: "History",
+            component: () => import("../views/History.vue"),
+          },
+        ],
       },
     ],
+  },
+  {
+    path: "/d",
+    name: "Desktop",
+    beforeEnter: [widthCheck],
+    component: () => import("../views/desktop/Desktop.vue"),
   },
   {
     path: "/404",
