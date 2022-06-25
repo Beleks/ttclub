@@ -48,7 +48,7 @@ const routes = [
     ],
   },
   {
-    path: "/d",
+    path: "/",
     name: "Desktop",
     beforeEnter: [widthCheck],
     component: () => import("../views/desktop/Desktop.vue"),
