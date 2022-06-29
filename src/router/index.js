@@ -36,12 +36,12 @@ const routes = [
           {
             path: "rating",
             name: "Rating",
-            component: () => import("../views/Rating.vue"),
+            component: () => import("../views/mobile/Rating.vue"),
           },
           {
             path: "history",
             name: "History",
-            component: () => import("../views/History.vue"),
+            component: () => import("../views/mobile/History.vue"),
           },
         ],
       },

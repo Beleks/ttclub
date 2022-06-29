@@ -2,14 +2,15 @@
   <div>
     <router-view></router-view>
   </div>
-  <div>footer</div>
+  <ClubFooter />
 </template>
 
 <script>
+// @ - not working
+import ClubFooter from "../../components/mobile/ClubFooter.vue";
+
 export default {
-  components: {
-    
-  },
+  components: { ClubFooter },
   mounted() {},
 };
 </script>

@@ -9,7 +9,7 @@ import "./index.css";
 import en from "./locales/en.json";
 import ru from "./locales/ru.json";
 
-// export
+// ! add export
 const i18n = createI18n({
   locale: "ru",
   messages: {
