@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 class="py-7 text-3xl">Page not found</h2>
-    <router-link class="underline" to="/d"> Go to home page </router-link>
+    <router-link class="underline" to="/m/hello"> Go to home page </router-link>
   </div>
 </template>
 
