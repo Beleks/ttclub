@@ -1,7 +1,7 @@
 <template>
   <div
     class="fixed bottom-0 w-full h-14 p-3 bg-white max_height"
-    :class="{ 'h-48 rounded-xl': popupIsOpen }"
+    :class="{ 'h-48 rounded-t-2xl': popupIsOpen }"
   >
     <transition name="list">
       <div v-if="popupIsOpen" class="popup_list">
