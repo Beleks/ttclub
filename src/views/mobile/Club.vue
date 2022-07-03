@@ -3,7 +3,9 @@
   <div>
     <router-view></router-view>
   </div>
-  <ClubFooter />
+  <template v-if="isClubHomePage">
+    <ClubFooter />
+  </template>
 </template>
 
 <script>
@@ -13,6 +15,12 @@ import ClubFooter from "../../components/mobile/ClubFooter.vue";
 
 export default {
   components: { ClubHeader, ClubFooter },
+  computed: {
+    isClubHomePage() {
+      const routeName = this.$route.name;
+      return routeName === "Rating" || routeName === "History";
+    },
+  },
   mounted() {},
 };
 </script>
