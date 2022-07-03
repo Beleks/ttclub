@@ -43,6 +43,11 @@ const routes = [
             name: "History",
             component: () => import("../views/mobile/History.vue"),
           },
+          {
+            path: "menu",
+            name: "Menu",
+            component: () => import("../views/mobile/Menu.vue"),
+          },
         ],
       },
     ],
