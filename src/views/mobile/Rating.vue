@@ -1,5 +1,5 @@
 <template>
-  <div>Rating</div>
+  <div class="py-14">Rating</div>
 </template>
 
 <script>

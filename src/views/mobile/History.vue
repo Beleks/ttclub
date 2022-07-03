@@ -1,5 +1,5 @@
 <template>
-  <div>History</div>
+  <div class="py-14">History</div>
 </template>
 
 <script>

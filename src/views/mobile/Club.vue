@@ -1,4 +1,5 @@
 <template>
+  <ClubHeader />
   <div>
     <router-view></router-view>
   </div>
@@ -7,10 +8,11 @@
 
 <script>
 // @ - not working
+import ClubHeader from "../../components/mobile/ClubHeader.vue";
 import ClubFooter from "../../components/mobile/ClubFooter.vue";
 
 export default {
-  components: { ClubFooter },
+  components: { ClubHeader, ClubFooter },
   mounted() {},
 };
 </script>
