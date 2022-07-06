@@ -11,7 +11,16 @@ const api = {
     }).then((response) => response.json());
   },
 
-  // async requestToApiByAdmin(params) {},
+  async requestToApiByAdmin(type, url, token, body) {
+    return await fetch(`${this.BASE_URL}${url}`, {
+      method: type,
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((response) => response.json());
+  },
 };
 
 export default api;

@@ -26,6 +26,8 @@ export default {
   },
   mounted() {
     const idClub = this.getCurrentIdClub();
+
+    this.$store.dispatch("verifyAuth", idClub);
     this.$store.dispatch("getPlayers", idClub);
     this.$store.dispatch("getDuels", idClub);
     this.$store.dispatch("getTournaments", idClub);

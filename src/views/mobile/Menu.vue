@@ -57,8 +57,19 @@
           English
         </div>
       </div>
-      <div class="mt-3 bg-red-500 text-slate-100 py-2 px-3 rounded">
+      <div
+        v-if="isAuth"
+        class="mt-3 bg-red-500 text-slate-100 py-2 px-3 rounded"
+        @click="logout()"
+      >
         Выход из аккаунта
+      </div>
+      <div
+        v-else
+        class="mt-3 bg-indigo-500 text-slate-100 py-2 px-3 rounded"
+        @click="loginAsAdmin()"
+      >
+        Войти как админ
       </div>
     </div>
     <div class="flex justify-between text-slate-600">
@@ -73,12 +84,16 @@ import MoonSvg from "../../components/svg/MoonSvg.vue";
 import SearchSvg from "../../components/svg/SearchSvg.vue";
 import UserSvg from "../../components/svg/UserSvg.vue";
 
+import { authMixin } from "../../mixins/auth";
+import { getCurrentIdClub } from "../../mixins/index";
+
 export default {
   components: {
     MoonSvg,
     UserSvg,
     SearchSvg,
   },
+  mixins: [authMixin, getCurrentIdClub],
   data() {
     return {
       activeLocaleClass: " border-indigo-500 text-indigo-500",
@@ -92,6 +107,12 @@ export default {
   methods: {
     changeLocale(locale) {
       this.$i18n.locale = locale;
+    },
+    loginAsAdmin() {
+      this.$store.dispatch("loginAsAdmin");
+    },
+    logout() {
+      this.$store.dispatch("logout");
     },
   },
 };

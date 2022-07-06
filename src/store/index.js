@@ -3,6 +3,7 @@ import api from "../api.js";
 
 export default createStore({
   state: {
+    isAuth: false,
     clubs: [],
     currentClub: {
       players: [],
@@ -13,6 +14,9 @@ export default createStore({
     },
   },
   mutations: {
+    verifyAuth(state, isAuth) {
+      state.isAuth = isAuth;
+    },
     setClubs(state, clubs) {
       state.clubs = clubs;
     },
@@ -27,6 +31,35 @@ export default createStore({
     },
   },
   actions: {
+    async loginAsAdmin({ commit }) {
+      let params = {
+        login: "test2",
+        password: "3223",
+      };
+
+      await api.requestToApi("POST", "auth/login", params).then((data) => {
+        localStorage.setItem("clubToken", JSON.stringify(data.access_token));
+        // commit("setToken", data.data);
+      });
+    },
+    async verifyAuth({ commit }, idClub) {
+      let token = localStorage.getItem("clubToken");
+
+      if (token) {
+        console.log(token);
+        await api
+          .requestToApiByAdmin("POST", "auth/me", JSON.parse(token))
+          .then((data) => {
+            commit("verifyAuth", data.id == idClub);
+          });
+      }
+    },
+    logout({ commit }) {
+      localStorage.removeItem("clubToken");
+      commit("verifyAuth", false);
+    },
+
+    // club
     async getClubs({ commit }) {
       await api.requestToApi("GET", "clubs").then((data) => {
         commit("setClubs", data.data);
