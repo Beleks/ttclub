@@ -33,17 +33,17 @@ export default createStore({
       });
     },
     async getPlayers({ commit }, idClub) {
-      await api.requestToApi("GET", `players/${idClub}`).then((data) => {
+      await api.requestToApi("GET", `${idClub}/players`).then((data) => {
         commit("setClubPlayers", data.data);
       });
     },
     async getDuels({ commit }, idClub) {
-      await api.requestToApi("GET", `duels/${idClub}`).then((data) => {
+      await api.requestToApi("GET", `${idClub}/duels`).then((data) => {
         commit("setClubDuels", data.data);
       });
     },
     async getTournaments({ commit }, idClub) {
-      await api.requestToApi("GET", `tournaments/${idClub}`).then((data) => {
+      await api.requestToApi("GET", `${idClub}/tournaments`).then((data) => {
         commit("setClubTournaments", data.data);
       });
     },

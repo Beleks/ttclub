@@ -29,7 +29,6 @@ export default {
     this.$store.dispatch("getPlayers", idClub);
     this.$store.dispatch("getDuels", idClub);
     this.$store.dispatch("getTournaments", idClub);
-
   },
 };
 </script>
