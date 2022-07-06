@@ -13,15 +13,21 @@
 import ClubHeader from "../../components/mobile/ClubHeader.vue";
 import ClubFooter from "../../components/mobile/ClubFooter.vue";
 
+import { getCurrentIdClub } from "../../mixins/index";
+
 export default {
   components: { ClubHeader, ClubFooter },
+  mixins: [getCurrentIdClub],
   computed: {
     isClubHomePage() {
       const routeName = this.$route.name;
       return routeName === "Rating" || routeName === "History";
     },
   },
-  mounted() {},
+  mounted() {
+    const idClub = this.getCurrentIdClub();
+    this.$store.dispatch("getPlayers", idClub);
+  },
 };
 </script>
 
