@@ -3,6 +3,9 @@ import api from "../api.js";
 
 export default createStore({
   state: {
+    admin: {
+      idClub: null,
+    },
     isAuth: false,
     clubs: [],
     currentClub: {
@@ -16,6 +19,9 @@ export default createStore({
   mutations: {
     verifyAuth(state, isAuth) {
       state.isAuth = isAuth;
+    },
+    setClubId(state, id) {
+      state.admin.idClub = id;
     },
     setClubs(state, clubs) {
       state.clubs = clubs;
@@ -31,22 +37,16 @@ export default createStore({
     },
   },
   actions: {
-    async loginAsAdmin({ commit }) {
-      let params = {
-        login: "test2",
-        password: "3223",
-      };
-
+    async loginAsAdmin({ commit }, params) {
       await api.requestToApi("POST", "auth/login", params).then((data) => {
+        commit("setClubId", data.id);
         localStorage.setItem("clubToken", JSON.stringify(data.access_token));
-        // commit("setToken", data.data);
       });
     },
     async verifyAuth({ commit }, idClub) {
       let token = localStorage.getItem("clubToken");
 
       if (token) {
-        console.log(token);
         await api
           .requestToApiByAdmin("POST", "auth/me", JSON.parse(token))
           .then((data) => {
@@ -54,9 +54,15 @@ export default createStore({
           });
       }
     },
-    logout({ commit }) {
-      localStorage.removeItem("clubToken");
-      commit("verifyAuth", false);
+    async logout({ commit }) {
+      let token = localStorage.getItem("clubToken");
+
+      await api
+        .requestToApiByAdmin("POST", "auth/logout", JSON.parse(token))
+        .then((data) => {
+          localStorage.removeItem("clubToken");
+          commit("verifyAuth", false);
+        });
     },
 
     // club

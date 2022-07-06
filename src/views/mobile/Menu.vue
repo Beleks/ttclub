@@ -109,10 +109,13 @@ export default {
       this.$i18n.locale = locale;
     },
     loginAsAdmin() {
-      this.$store.dispatch("loginAsAdmin");
+      // change on replace
+      this.$router.push({ name: "Login" });
     },
     logout() {
-      this.$store.dispatch("logout");
+      this.$store.dispatch("logout").then(() => {
+        this.$router.replace({ name: "Login" });
+      });
     },
   },
 };
