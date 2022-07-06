@@ -43,4 +43,9 @@ export default {
 #app {
   /* margin-top: 60px; */
 }
+.svg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 </style>

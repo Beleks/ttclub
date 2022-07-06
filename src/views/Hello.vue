@@ -24,9 +24,11 @@
         </span>
       </div>
     </div>
-    <div>
+    <div v-if="clubsLoaded">
       <div class="mb-2">{{ $t("chooseClub") }}</div>
       <div
+        v-for="club in clubs"
+        :key="club.id"
         class="
           flex
           justify-between
@@ -35,27 +37,36 @@
           rounded
           px-4
           py-2
+          mb-3
           shadow-lg shadow-indigo-100/50
         "
-        @click="chooseClub('1234')"
+        @click="chooseClub(club.id)"
       >
-        <div class="text-indigo-500">Elecard tt club</div>
-        <div class="text-indigo-500">-></div>
+        <div class="text-indigo-500">{{ club.name }}</div>
+        <ArrowRight1Svg class="fill-indigo-500" />
       </div>
     </div>
+    <template v-else> Загрузка клубов... </template>
   </div>
 </template>
 
 <script>
+import ArrowRight1Svg from "../components/svg/ArrowRight1Svg.vue";
+
 export default {
+  components: { ArrowRight1Svg },
   data() {
     return {
       activeLocaleClass: "font-medium text-indigo-500",
+      clubsLoaded: false,
     };
   },
   computed: {
     locale() {
       return this.$i18n.locale;
+    },
+    clubs() {
+      return this.$store.state.clubs;
     },
   },
   methods: {
@@ -66,6 +77,11 @@ export default {
       // SET REPLACE
       this.$router.push({ name: "Club", params: { id: idClub } });
     },
+  },
+  mounted() {
+    this.$store.dispatch("getClubs").then(() => {
+      this.clubsLoaded = true;
+    });
   },
 };
 </script>

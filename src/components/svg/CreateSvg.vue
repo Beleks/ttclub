@@ -24,9 +24,5 @@ export default {};
 </script>
 
 <style>
-.svg {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 </style>
