@@ -24,7 +24,7 @@
         </span>
       </div>
     </div>
-    <div v-if="clubsLoaded">
+    <div v-if="clubs.length">
       <div class="mb-2">{{ $t("chooseClub") }}</div>
       <div
         v-for="club in clubs"
@@ -58,7 +58,6 @@ export default {
   data() {
     return {
       activeLocaleClass: "font-medium text-indigo-500",
-      clubsLoaded: false,
     };
   },
   computed: {
@@ -79,9 +78,7 @@ export default {
     },
   },
   mounted() {
-    this.$store.dispatch("getClubs").then(() => {
-      this.clubsLoaded = true;
-    });
+    this.$store.dispatch("getClubs");
   },
 };
 </script>
