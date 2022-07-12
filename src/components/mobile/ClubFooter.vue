@@ -137,14 +137,27 @@ export default {
       this.popupIsOpen = !this.popupIsOpen;
       // this.$store.commit("popupCreateToggle", true);
     },
-    create(type) {},
+    create(type) {
+      let routeName = "";
+      switch (type) {
+        case "duel":
+          routeName = "CreateDuel";
+          break;
+
+        case "tournament":
+          routeName = "CreateTournament";
+          break;
+
+        default:
+          break;
+      }
+      this.$router.replace({ name: routeName });
+    },
   },
 };
 </script>
 
 <style>
-.popup_item {
-}
 .max_height {
   transition: height 0.3s ease-in-out;
 }
