@@ -105,8 +105,4 @@ const router = createRouter({
   routes,
 });
 
-router.afterEach((to) => {
-  console.log(to.fullPath, "to.fullPath");
-});
-
 export default router;
