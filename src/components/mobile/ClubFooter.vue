@@ -35,7 +35,7 @@
           @click="create('tournament')"
         >
           <div>Турнир</div>
-          <CupSvg :size="24" />
+          <CupSvg :size="24" :color="'white'" />
         </div>
       </div>
     </transition>
