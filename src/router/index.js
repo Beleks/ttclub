@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 
+// after hooks
+
+// befor enter hooks
 function widthCheck(to) {
   let width = window.innerWidth;
   if (to.matched[0].name == "Mobile" && width > 800) {
@@ -55,6 +58,23 @@ const routes = [
           },
         ],
       },
+      {
+        path: ":id/create",
+        name: "Create",
+        component: () => import("../views/mobile/Create.vue"),
+        children: [
+          {
+            path: "duel",
+            name: "CreateDuel",
+            component: () => import("../views/mobile/CreateDuel.vue"),
+          },
+          {
+            path: "tournament",
+            name: "CreateTournament",
+            component: () => import("../views/mobile/CreateTournament.vue"),
+          },
+        ],
+      },
     ],
   },
   {
@@ -83,6 +103,10 @@ const router = createRouter({
   history: createWebHistory(),
   // base: process.env.BASE_URL,
   routes,
+});
+
+router.afterEach((to) => {
+  console.log(to.fullPath, "to.fullPath");
 });
 
 export default router;
