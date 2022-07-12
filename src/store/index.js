@@ -16,6 +16,11 @@ export default createStore({
       },
     },
   },
+  getters: {
+    getPlayerById: (state) => (idPlayer) => {
+      return state.currentClub.players.find((player) => player.id === idPlayer);
+    },
+  },
   mutations: {
     verifyAuth(state, isAuth) {
       state.isAuth = isAuth;

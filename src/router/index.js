@@ -44,6 +44,11 @@ const routes = [
             component: () => import("../views/mobile/History.vue"),
           },
           {
+            path: "history/tournament",
+            name: "HistoryTournament",
+            component: () => import("../views/mobile/HistoryTournament.vue"),
+          },
+          {
             path: "menu",
             name: "Menu",
             component: () => import("../views/mobile/Menu.vue"),

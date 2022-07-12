@@ -1,5 +1,7 @@
 {
   "language": "En",
   "hello": "Hello, world!",
-  "chooseClub": "Choose a club"
+  "chooseClub": "Choose a club",
+  "duels": "Duels",
+  "tournaments": "Tournaments"
 }

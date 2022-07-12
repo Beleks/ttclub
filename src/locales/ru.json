@@ -1,5 +1,7 @@
 {
   "language": "Ru",
   "hello": "Привет, мир!",
-  "chooseClub": "Выберите клуб"
+  "chooseClub": "Выберите клуб",
+  "duels": "Дуэли",
+  "tournaments": "Турниры"
 }
