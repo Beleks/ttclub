@@ -56,7 +56,7 @@ export default {
       return typeComponent;
     },
     anyDataHistory() {
-      return this.$store.state.currentClub.players.length;
+      return this.$store.state.currentClub.history.duels.length;
     },
   },
   methods: {
