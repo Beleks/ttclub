@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <template v-if="!anyDataPlayers"> Загрузка... </template>
     <template v-else>
       <router-view />
