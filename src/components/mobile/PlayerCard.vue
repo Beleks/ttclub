@@ -2,7 +2,7 @@
   <div class="relative">
     <div class="bg-white py-2 px-3 rounded mt-3 flex justify-between">
       <div>{{ player.surname }} {{ player.name }}</div>
-      <div>{{ player.rating }}</div>
+      <div>{{ Math.floor(player.rating) }}</div>
     </div>
     <div
       class="absolute player_pos text-xs"

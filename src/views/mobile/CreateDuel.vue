@@ -15,7 +15,7 @@
             <span v-if="!player1.surname" class="opacity-0">Player</span>
             <template v-else>
               <span>{{ player1.surname }} {{ player1.name }}</span>
-              <span>{{ player1.rating }}</span>
+              <span>{{ Math.floor(player1.rating) }}</span>
             </template>
           </div>
         </div>
@@ -31,7 +31,7 @@
             <span v-if="!player2.surname" class="opacity-0">Player</span>
             <template v-else>
               <span>{{ player2.surname }} {{ player2.name }}</span>
-              <span>{{ player2.rating }}</span>
+              <span>{{ Math.floor(player2.rating) }}</span>
             </template>
           </div>
         </div>
@@ -40,7 +40,6 @@
         @choosePlayer="setPlayer"
         :selectedPlayers="selectedPlayers"
       />
-      <!-- players list component -->
       <div
         :class="[
           accessToCreate ? ' bg-indigo-500' : 'bg-slate-300',

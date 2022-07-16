@@ -10,7 +10,7 @@
       @click="choosePlayer(player)"
     >
       <div>{{ player.surname }} {{ player.name }}</div>
-      <div>{{ player.rating }}</div>
+      <div>{{ Math.floor(player.rating) }}</div>
     </div>
   </div>
 </template>
@@ -41,14 +41,14 @@ export default {
     isSelect() {
       return true;
     },
-    
   },
   methods: {
     choosePlayer(player) {
       if (player.isSelect) {
-        return;
+        this.$emit("notChoosePlayer", player);
+      } else {
+        this.$emit("choosePlayer", player);
       }
-      this.$emit("choosePlayer", player);
     },
   },
 };
