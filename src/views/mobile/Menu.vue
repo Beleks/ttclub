@@ -1,9 +1,12 @@
 <template>
   <div class="p-3 pt-14 flex flex-col justify-between h-screen">
     <div>
-      <div class="text-xs text-slate-600">Клуб</div>
+      <div class="text-xs text-slate-600" v-if="isAuth">Клуб</div>
       <div class="">
-        <div class="flex justify-between bg-white py-2 px-3 rounded mt-3">
+        <div
+          v-if="isAuth"
+          class="flex justify-between bg-white py-2 px-3 rounded mt-3"
+        >
           <div class="flex">
             <UserSvg />
             <span class="ml-2">Игроки</span>
