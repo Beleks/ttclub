@@ -2,7 +2,8 @@
   <div class="flex justify-between p-3 fixed w-full bg-slate-50">
     <div>Club</div>
     <div v-if="isMenuOpen" @click="closeMenu()">Назад</div>
-    <div v-else @click="openMenu()">Меню</div>
+    <div v-if="mainPage" @click="openMenu()">Меню</div>
+    <div v-if="pagePlayers" @click="backToMenu()">Назад</div>
   </div>
 </template>
 
@@ -12,6 +13,12 @@ export default {
     isMenuOpen() {
       return this.$route.name === "Menu";
     },
+    mainPage() {
+      return this.$route.name == "History" || this.$route.name == "Rating";
+    },
+    pagePlayers() {
+      return this.$route.name === "MenuPlayers";
+    },
   },
   methods: {
     openMenu() {
@@ -19,6 +26,9 @@ export default {
     },
     closeMenu() {
       this.$router.replace({ name: "Rating" });
+    },
+    backToMenu() {
+      this.$router.replace({ name: "Menu" });
     },
   },
 };

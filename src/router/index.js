@@ -56,6 +56,11 @@ const routes = [
             name: "Menu",
             component: () => import("../views/mobile/Menu.vue"),
           },
+          {
+            path: "menu/players",
+            name: "MenuPlayers",
+            component: () => import("../views/mobile/MenuPlayers.vue"),
+          },
         ],
       },
       {

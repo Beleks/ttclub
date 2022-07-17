@@ -91,5 +91,15 @@ export default createStore({
         commit("setClubTournaments", data.data);
       });
     },
+    // club create
+    async createPlayer({ commit }, player) {
+      let token = localStorage.getItem("clubToken");
+
+      await api
+        .requestToApiByAdmin("POST", `create/player`, JSON.parse(token), player)
+        .then((data) => {
+          console.log("was created");
+        });
+    },
   },
 });

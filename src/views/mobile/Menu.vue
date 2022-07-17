@@ -6,12 +6,13 @@
         <div
           v-if="isAuth"
           class="flex justify-between bg-white py-2 px-3 rounded mt-3"
+          @click="showClubPlayers()"
         >
           <div class="flex">
             <UserSvg />
             <span class="ml-2">Игроки</span>
           </div>
-          <div class="text-slate-600">12/50</div>
+          <div class="text-slate-600">{{ players }}/50</div>
         </div>
         <router-link
           :to="{ name: 'Hello' }"
@@ -106,8 +107,14 @@ export default {
     locale() {
       return this.$i18n.locale;
     },
+    players() {
+      return this.$store.state.currentClub.players.length;
+    },
   },
   methods: {
+    showClubPlayers() {
+      this.$router.replace({ name: "MenuPlayers" });
+    },
     changeLocale(locale) {
       this.$i18n.locale = locale;
     },
