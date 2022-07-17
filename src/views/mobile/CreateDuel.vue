@@ -83,7 +83,12 @@ export default {
     },
     createDuel() {
       if (this.accessToCreate) {
-        console.log("duel created");
+        // set players to record into state
+        this.$store.commit("recordDuel", {
+          player1: this.player1,
+          player2: this.player2,
+        });
+        this.$router.replace({ name: "CreateDuelResult" });
       }
     },
   },

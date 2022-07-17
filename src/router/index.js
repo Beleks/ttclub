@@ -74,6 +74,11 @@ const routes = [
             component: () => import("../views/mobile/CreateDuel.vue"),
           },
           {
+            path: "duel/score",
+            name: "CreateDuelResult",
+            component: () => import("../views/mobile/CreateDuelResult.vue"),
+          },
+          {
             path: "tournament",
             name: "CreateTournament",
             component: () => import("../views/mobile/CreateTournament.vue"),

@@ -15,6 +15,10 @@ export default createStore({
         tournaments: [],
       },
     },
+    record: {
+      duel: {},
+      tournament: {},
+    },
   },
   getters: {
     getPlayerById: (state) => (idPlayer) => {
@@ -39,6 +43,20 @@ export default createStore({
     },
     setClubTournaments(state, tournaments) {
       state.currentClub.history.tournaments = tournaments;
+    },
+
+    // record Duels, Tournaments into store
+    recordDuel(state, duelPlayers) {
+      let duel = {
+        score1: 0,
+        score2: 0,
+        // assign player1, player2
+      };
+      state.record.duel = Object.assign(duel, duelPlayers);
+    },
+    recordScoreDuel(state, { score1, score2 }) {
+      state.record.duel.score1 = score1;
+      state.record.duel.score2 = score2;
     },
   },
   actions: {
@@ -91,6 +109,7 @@ export default createStore({
         commit("setClubTournaments", data.data);
       });
     },
+
     // club create
     async createPlayer({ commit }, player) {
       let token = localStorage.getItem("clubToken");
@@ -98,8 +117,21 @@ export default createStore({
       await api
         .requestToApiByAdmin("POST", `create/player`, JSON.parse(token), player)
         .then((data) => {
-          console.log("was created");
+          console.log("created");
         });
     },
+
+    async createDuel({ commit }, duel) {
+      let token = localStorage.getItem("clubToken");
+
+      await api
+        .requestToApiByAdmin("POST", `create/duel`, JSON.parse(token), duel)
+        .then((data) => {
+          console.log("created");
+        });
+    },
+
+    // record Duels, Tournaments into store
+    recordDuel({ commit }, duel) {},
   },
 });

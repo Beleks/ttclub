@@ -56,7 +56,10 @@ export default {
       return typeComponent;
     },
     anyDataHistory() {
-      return this.$store.state.currentClub.history.duels.length;
+      return (
+        this.$store.state.currentClub.history.duels.length &&
+        this.$store.state.currentClub.players.length
+      );
     },
   },
   methods: {

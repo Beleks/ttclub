@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mb-3">
     <div>
       <div :class="[{ 'text-indigo-500': isWinner }, 'flex items-center']">
         <div class="px-2">
