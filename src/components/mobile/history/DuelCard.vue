@@ -12,7 +12,7 @@
           ]"
         >
           <div>{{ players.p1.surname }} {{ players.p1.name }}</div>
-          <div>{{ item.rating_first }}</div>
+          <div>{{ Math.floor(item.rating_first) }}</div>
         </div>
       </div>
       <div :class="[{ 'text-indigo-500': !isWinner }, 'flex items-center']">
@@ -26,7 +26,7 @@
           ]"
         >
           <div>{{ players.p2.surname }} {{ players.p2.name }}</div>
-          <div>{{ item.rating_second }}</div>
+          <div>{{ Math.floor(item.rating_second) }}</div>
         </div>
       </div>
     </div>
