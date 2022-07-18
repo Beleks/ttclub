@@ -6,21 +6,21 @@
       <div class="text-4xl flex justify-between items-center">
         <div>
           <div class="arrow_up" @click="changeScore('score1', 1)">
-            <ArrowDownSvg />
+            <ArrowDownSvg :color="'#000000'" />
           </div>
           <div class="mx-2 mb-1">{{ result.score1 }}</div>
           <div class="arrow_down" @click="changeScore('score1', -1)">
-            <ArrowDownSvg />
+            <ArrowDownSvg :color="'#000000'" />
           </div>
         </div>
         <span class="mx-6 mb-2">:</span>
         <div>
           <div class="arrow_up" @click="changeScore('score2', 1)">
-            <ArrowDownSvg />
+            <ArrowDownSvg :color="'#000000'" />
           </div>
           <div class="mx-2 mb-1">{{ result.score2 }}</div>
           <div class="arrow_down" @click="changeScore('score2', -1)">
-            <ArrowDownSvg />
+            <ArrowDownSvg :color="'#000000'" />
           </div>
         </div>
       </div>

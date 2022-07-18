@@ -70,7 +70,7 @@
         @click="openPopup()"
       >
         <template v-if="popupIsOpen">
-          <ArrowDownSvg />
+          <ArrowDownSvg :color="'white'" />
         </template>
         <template v-else>
           <CreateSvg />
