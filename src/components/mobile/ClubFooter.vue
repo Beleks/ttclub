@@ -121,8 +121,7 @@ export default {
       return this.$route.name;
     },
     isAuth() {
-      // return this.$store.state.isAuth;
-      return true;
+      return this.$store.state.isAuth;
     },
   },
   methods: {
