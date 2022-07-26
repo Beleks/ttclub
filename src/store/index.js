@@ -167,7 +167,7 @@ export default createStore({
           }
           stageDuels.push(pair);
         }
-        commit("fillTournamentStages", stageDuels);
+        commit("fillTournamentStage", stageDuels);
         playersLeft = playersLeft / 2;
         currentStage++;
       } while (!(playersLeft == 1));
