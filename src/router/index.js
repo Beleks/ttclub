@@ -82,6 +82,19 @@ const routes = [
             path: "tournament",
             name: "CreateTournament",
             component: () => import("../views/mobile/CreateTournament.vue"),
+            children: [
+              {
+                path: "grid",
+                name: "CreateTournamentGrid",
+                component: () =>
+                  import("../views/mobile/CreateTournamentGrid.vue"),
+              },
+              // {
+              //   name: "TournamentDuel",
+              //   path: "duel",
+              //   component: () => import("../views/TournamentDuel.vue"),
+              // },
+            ],
           },
         ],
       },

@@ -17,7 +17,10 @@ export default createStore({
     },
     record: {
       duel: {},
-      tournament: {},
+      tournament: {
+        players: [],
+        stages: [],
+      },
     },
   },
   getters: {
@@ -57,6 +60,12 @@ export default createStore({
     recordScoreDuel(state, { score1, score2 }) {
       state.record.duel.score1 = score1;
       state.record.duel.score2 = score2;
+    },
+    recordTournamentPlayers(state, tournamentPlayers) {
+      state.record.tournament.players.push(tournamentPlayers);
+    },
+    fillTournamentStage(state, stageDuels) {
+      state.record.tournament.stages.push(stageDuels);
     },
   },
   actions: {
@@ -133,5 +142,35 @@ export default createStore({
 
     // record Duels, Tournaments into store
     recordDuel({ commit }, duel) {},
+    recordTournament({ commit }, tournamentPlayers) {
+      commit("recordTournamentPlayers", tournamentPlayers);
+      let currentStage = 0;
+      let playersLeft = tournamentPlayers.length;
+      do {
+        let stageDuels = [];
+        for (let index = 0; index < playersLeft; index += 2) {
+          let pair = {};
+          if (currentStage == 0) {
+            pair = {
+              id1: tournamentPlayers[index].id,
+              id2: tournamentPlayers[index + 1].id,
+              score1: 0,
+              score2: 0,
+            };
+          } else {
+            pair = {
+              id1: null,
+              id2: null,
+              score1: 0,
+              score2: 0,
+            };
+          }
+          stageDuels.push(pair);
+        }
+        commit("fillTournamentStages", stageDuels);
+        playersLeft = playersLeft / 2;
+        currentStage++;
+      } while (!(playersLeft == 1));
+    },
   },
 });

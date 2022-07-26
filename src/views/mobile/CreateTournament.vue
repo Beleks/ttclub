@@ -1,23 +1,28 @@
 <template>
   <div>
     <HeaderTournament />
-    <div class="height-calc p-3 flex flex-col justify-between">
-      <PlayerList
-        :selectedPlayers="selectedPlayers"
-        @choosePlayer="setPlayer"
-        @notChoosePlayer="removePlayer"
-      />
-      <div class="text-xs">Кол-во игроков должно быть кратно 8</div>
-      <div
-        :class="[
-          accessToCreate ? ' bg-indigo-500' : 'bg-slate-300',
-          'mt-4 py-2 px-3 rounded text-white',
-        ]"
-        @click="createDuel()"
-      >
-        Создать
+    <template v-if="playersNotSelected">
+      <div class="height-calc p-3 flex flex-col justify-between">
+        <PlayerList
+          :selectedPlayers="selectedPlayers"
+          @choosePlayer="setPlayer"
+          @notChoosePlayer="removePlayer"
+        />
+        <div class="text-xs">Кол-во игроков должно быть кратно 8</div>
+        <div
+          :class="[
+            accessToCreate ? ' bg-indigo-500' : 'bg-slate-300',
+            'mt-4 py-2 px-3 rounded text-white',
+          ]"
+          @click="createTournament()"
+        >
+          Создать
+        </div>
       </div>
-    </div>
+    </template>
+    <template v-else>
+      <router-view></router-view>
+    </template>
   </div>
 </template>
 
@@ -36,6 +41,9 @@ export default {
     };
   },
   computed: {
+    playersNotSelected() {
+      return !this.$store.state.record.tournament.players.length;
+    },
     accessToCreate() {
       if (this.selectedPlayers.length > 0) {
         return !(this.selectedPlayers.length % 8);
@@ -54,9 +62,14 @@ export default {
 
       this.selectedPlayers.splice(index, 1);
     },
-    createDuel() {
+    createTournament() {
       if (this.accessToCreate) {
-        console.log("tournament created");
+        this.$router.replace({
+          name: "CreateTournamentGrid",
+          query: { stage: 0 },
+        });
+        // action to create in store
+        this.$store.dispatch("recordTournament", this.selectedPlayers);
       }
     },
   },
