@@ -42,7 +42,11 @@
         </div>
 
         <div>
-          <ScoreDuel :player1="duel.player1" :player2="duel.player2" />
+          <ScoreDuel
+            :player1="duel.player1"
+            :player2="duel.player2"
+            @changeScore="changeScore"
+          />
         </div>
       </div>
       <div
@@ -84,7 +88,16 @@ export default {
     cancelCreate() {
       this.$router.replace({ name: "Club" });
     },
+    changeScore(result) {
+      this.$store.commit("recordScoreDuel", {
+        score1: result.score1,
+        score2: result.score2,
+      });
+    },
     saveDuel() {
+      if (!this.accessToCreate) {
+        return;
+      }
       let duel = {
         id_first: this.duel.player1.id,
         id_second: this.duel.player2.id,

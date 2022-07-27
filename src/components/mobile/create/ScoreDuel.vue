@@ -56,11 +56,7 @@ export default {
         return;
       }
       this.result[score] = this.result[score] + value;
-      this.$emit("changescore", this.result);
-      this.$store.commit("recordScoreDuel", {
-        score1: this.result.score1,
-        score2: this.result.score2,
-      });
+      this.$emit("changeScore", this.result);
     },
   },
 };
