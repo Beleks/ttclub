@@ -16,7 +16,7 @@
           {{ $t(`${category}`) }}
         </div>
       </div>
-      <div v-for="item in categoryItems" :key="item.id">
+      <div class="mb-3" v-for="item in categoryItems" :key="item.id">
         <component :is="categoryItemsComponent" :item="item" />
       </div>
     </template>
