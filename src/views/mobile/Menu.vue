@@ -77,7 +77,7 @@
       </div>
     </div>
     <div class="flex justify-between text-slate-600">
-      <div>v 0.1.14</div>
+      <div>v {{ app_version }}</div>
       <div><MoonSvg /></div>
     </div>
   </div>
@@ -100,6 +100,7 @@ export default {
   mixins: [authMixin, getCurrentIdClub],
   data() {
     return {
+      app_version: __APP_VERSION__,
       activeLocaleClass: " border-indigo-500 text-indigo-500",
     };
   },

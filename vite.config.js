@@ -18,4 +18,7 @@ export default defineConfig({
       targets: ["defaults", "not IE 11"],
     }),
   ],
+  define: {
+    __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
+  },
 });

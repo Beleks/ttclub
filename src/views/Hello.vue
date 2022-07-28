@@ -7,7 +7,7 @@
       <div
         class="my-3 py-0.5 px-4 bg-indigo-100 rounded text-sm text-indigo-500"
       >
-        v 0.1.14
+        v {{ app_version }}
       </div>
       <div class="mt-2">
         <span
@@ -57,6 +57,7 @@ export default {
   components: { ArrowRight1Svg },
   data() {
     return {
+      app_version: __APP_VERSION__,
       activeLocaleClass: "font-medium text-indigo-500",
     };
   },
