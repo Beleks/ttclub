@@ -1,10 +1,117 @@
 <template>
-  <div>grid</div>
+  <div>
+    <HeaderTournament />
+    <div class="flex justify-between items-center m-3">
+      <div
+        :class="{ ['opacity-0']: !chooseStage }"
+        class="left rounded bg-slate-200 px-2 py-0.5"
+        @click="stageChange(-1)"
+      >
+        <ArrowRight1Svg />
+      </div>
+      <div>{{ stageTitle }}</div>
+      <div
+        :class="{ ['opacity-0']: chooseStage == stages.length - 1 }"
+        class="rounded bg-slate-200 px-2 py-0.5"
+        @click="stageChange(1)"
+      >
+        <ArrowRight1Svg />
+      </div>
+    </div>
+    <div class="px-3">
+      <div
+        v-for="(duel, index) in currentStage"
+        :key="index"
+        @click="chooseDuel(duel, index)"
+        class="mb-3"
+      >
+        <TournamentDuelCard :duel="duel" />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-export default {};
+import HeaderTournament from "../../components/mobile/create/HeaderTournament.vue";
+import TournamentDuelCard from "../../components/mobile/history/TournamentDuelCard.vue";
+import ArrowRight1Svg from "../../components/svg/ArrowRight1Svg.vue";
+
+export default {
+  components: {
+    HeaderTournament,
+    ArrowRight1Svg,
+    TournamentDuelCard,
+  },
+  computed: {
+    chooseStage() {
+      return Number(this.$route.query.stage);
+    },
+
+    stageTitle() {
+      let stages = this.stages.length;
+      this.chooseStage;
+      let title = "";
+      switch (stages - this.chooseStage) {
+        case 1:
+          title = "Финал";
+          break;
+        case 2:
+          title = "Полуфинал";
+          break;
+        default:
+          title = `1/${Math.pow(2, stages - this.chooseStage - 1)}`;
+          break;
+      }
+      return title;
+    },
+    stages() {
+      return this.$store.state.record.tournament.stages;
+    },
+    currentStage() {
+      return this.stages[this.chooseStage];
+    },
+  },
+  methods: {
+    stageChange(step) {
+      if (
+        this.chooseStage + step >= this.stages.length ||
+        this.chooseStage + step < 0
+      ) {
+        return;
+      } else {
+        let currentPath = this.$route.path;
+        this.$router.replace({
+          path: currentPath,
+          query: { stage: Number(this.$route.query.stage) + step },
+        });
+      }
+    },
+    chooseDuel(duel, index) {
+      if (duel.score1 && duel.score2) {
+        // Score is already set
+        return;
+      }
+      if (!(duel.id1 && duel.id2)) {
+        // Players are not ready
+        return;
+      } else {
+        this.$store.commit("setTournamentCurrentDuel", {
+          id1: duel.id1,
+          id2: duel.id2,
+        });
+        this.$router.push({
+          path: "duel",
+          append: false,
+          query: Object.assign(this.$route.query, { index }),
+        });
+      }
+    },
+  },
+};
 </script>
 
-<style>
+<style scoped>
+.left {
+  transform: rotate(180deg);
+}
 </style>

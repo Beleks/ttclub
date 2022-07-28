@@ -20,6 +20,10 @@ export default createStore({
       tournament: {
         players: [],
         stages: [],
+        currentDuel: {
+          id1: 0,
+          id2: 0,
+        },
       },
     },
   },
@@ -67,6 +71,9 @@ export default createStore({
     fillTournamentStage(state, stageDuels) {
       state.record.tournament.stages.push(stageDuels);
     },
+    setTournamentCurrentDuel(state, duel) {
+      state.record.tournament.currentDuel = duel;
+    },
   },
   actions: {
     async loginAsAdmin({ commit }, params) {
@@ -79,22 +86,18 @@ export default createStore({
       let token = localStorage.getItem("clubToken");
 
       if (token) {
-        await api
-          .requestToApiByAdmin("POST", "auth/me", JSON.parse(token))
-          .then((data) => {
-            commit("verifyAuth", data.id == idClub);
-          });
+        await api.requestToApiByAdmin("POST", "auth/me", JSON.parse(token)).then((data) => {
+          commit("verifyAuth", data.id == idClub);
+        });
       }
     },
     async logout({ commit }) {
       let token = localStorage.getItem("clubToken");
 
-      await api
-        .requestToApiByAdmin("POST", "auth/logout", JSON.parse(token))
-        .then((data) => {
-          localStorage.removeItem("clubToken");
-          commit("verifyAuth", false);
-        });
+      await api.requestToApiByAdmin("POST", "auth/logout", JSON.parse(token)).then((data) => {
+        localStorage.removeItem("clubToken");
+        commit("verifyAuth", false);
+      });
     },
 
     // club
@@ -123,21 +126,17 @@ export default createStore({
     async createPlayer({ commit }, player) {
       let token = localStorage.getItem("clubToken");
 
-      await api
-        .requestToApiByAdmin("POST", `create/player`, JSON.parse(token), player)
-        .then((data) => {
-          console.log("created");
-        });
+      await api.requestToApiByAdmin("POST", `create/player`, JSON.parse(token), player).then((data) => {
+        console.log("created");
+      });
     },
 
     async createDuel({ commit }, duel) {
       let token = localStorage.getItem("clubToken");
 
-      await api
-        .requestToApiByAdmin("POST", `create/duel`, JSON.parse(token), duel)
-        .then((data) => {
-          console.log("created");
-        });
+      await api.requestToApiByAdmin("POST", `create/duel`, JSON.parse(token), duel).then((data) => {
+        console.log("created");
+      });
     },
 
     // record Duels, Tournaments into store

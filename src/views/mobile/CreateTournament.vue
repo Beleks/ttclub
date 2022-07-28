@@ -1,7 +1,7 @@
 <template>
   <div>
-    <HeaderTournament />
     <template v-if="playersNotSelected">
+      <HeaderTournament />
       <div class="height-calc p-3 flex flex-col justify-between">
         <PlayerList
           :selectedPlayers="selectedPlayers"

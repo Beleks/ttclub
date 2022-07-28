@@ -89,11 +89,11 @@ const routes = [
                 component: () =>
                   import("../views/mobile/CreateTournamentGrid.vue"),
               },
-              // {
-              //   name: "TournamentDuel",
-              //   path: "duel",
-              //   component: () => import("../views/TournamentDuel.vue"),
-              // },
+              {
+                path: "duel",
+                name: "CreateTournamentDuel",
+                component: () => import("../views/mobile/CreateTournamentDuel.vue"),
+              },
             ],
           },
         ],
