@@ -28,6 +28,16 @@
         <TournamentDuelCard :duel="duel" />
       </div>
     </div>
+    <div
+      v-if="showSaveBtn"
+      :class="[
+        accessToSaveTournament ? ' bg-indigo-500' : 'bg-slate-300',
+        'm-3 py-2 px-3 rounded text-white button-calc fixed bottom-0',
+      ]"
+      @click="saveTournament()"
+    >
+      Сохранить
+    </div>
   </div>
 </template>
 
@@ -70,6 +80,12 @@ export default {
     currentStage() {
       return this.stages[this.chooseStage];
     },
+    showSaveBtn() {
+      return this.chooseStage == this.stages.length - 1;
+    },
+    accessToSaveTournament() {
+      return this.$store.state.record.tournament.readyToSave;
+    },
   },
   methods: {
     stageChange(step) {
@@ -87,7 +103,7 @@ export default {
       }
     },
     chooseDuel(duel, index) {
-      if (duel.score1 && duel.score2) {
+      if (duel.score1 || duel.score2) {
         // Score is already set
         return;
       }
@@ -106,6 +122,13 @@ export default {
         });
       }
     },
+    saveTournament() {
+      this.$store.dispatch("createTournament").then(() => {
+        this.$router.replace({
+          name: "Club",
+        });
+      });
+    },
   },
 };
 </script>
@@ -113,5 +136,8 @@ export default {
 <style scoped>
 .left {
   transform: rotate(180deg);
+}
+.button-calc {
+  width: calc(100% - 1.5rem);
 }
 </style>

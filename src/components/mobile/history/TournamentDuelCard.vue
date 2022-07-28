@@ -3,7 +3,7 @@
     <div
       v-if="duel.id1"
       class="flex"
-      :class="{ winPlayer: duel.score1 > duel.score2 }"
+      :class="{ ['text-indigo-500']: duel.score1 > duel.score2 }"
     >
       <div class="py-1 px-3">{{ duel.score1 }}</div>
       <div class="rounded-t bg-white flex justify-between grow px-2 py-1">
@@ -31,7 +31,7 @@
     <div
       v-if="duel.id2"
       class="flex"
-      :class="{ winPlayer: duel.score2 > duel.score1 }"
+      :class="{ ['text-indigo-500']: duel.score2 > duel.score1 }"
     >
       <div class="py-1 px-3">{{ duel.score2 }}</div>
       <div

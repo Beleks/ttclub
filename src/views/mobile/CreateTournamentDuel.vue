@@ -51,7 +51,7 @@
       </div>
       <div
         :class="[
-          accessToCreate ? ' bg-indigo-500' : 'bg-slate-300',
+          accessToSaveDuel ? ' bg-indigo-500' : 'bg-slate-300',
           'mt-4 py-2 px-3 rounded text-white',
         ]"
         @click="saveResult()"
@@ -94,7 +94,7 @@ export default {
         p2,
       };
     },
-    accessToCreate() {
+    accessToSaveDuel() {
       if (this.result.score1 === this.result.score2) {
         return false;
       } else {
@@ -110,7 +110,21 @@ export default {
       this.result = result;
     },
     saveResult() {
-      
+      if (this.accessToSaveDuel) {
+        let winnerId = null;
+        if (this.result.score1 > this.result.score2) {
+          winnerId = this.players.p1.id;
+        } else {
+          winnerId = this.players.p2.id;
+        }
+        this.$store.dispatch("handlingTournamentDuelResult", {
+          score: this.result,
+          stage: this.$route.query.stage,
+          indexDuel: this.$route.query.index,
+          winnerId,
+        });
+        this.goBack();
+      }
     },
   },
 };

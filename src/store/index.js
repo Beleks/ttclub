@@ -18,12 +18,14 @@ export default createStore({
     record: {
       duel: {},
       tournament: {
+        type: "classic",
         players: [],
         stages: [],
         currentDuel: {
           id1: 0,
           id2: 0,
         },
+        readyToSave: false,
       },
     },
   },
@@ -66,13 +68,37 @@ export default createStore({
       state.record.duel.score2 = score2;
     },
     recordTournamentPlayers(state, tournamentPlayers) {
-      state.record.tournament.players.push(tournamentPlayers);
+      state.record.tournament.players = tournamentPlayers;
     },
     fillTournamentStage(state, stageDuels) {
       state.record.tournament.stages.push(stageDuels);
     },
     setTournamentCurrentDuel(state, duel) {
       state.record.tournament.currentDuel = duel;
+    },
+    setResultTournamentDuel(state, { score, stage, indexDuel }) {
+      Object.assign(state.record.tournament.stages[stage][indexDuel], score);
+    },
+    movingPlayerToNextStage(state, { nextStage, indexDuel, winnerId, pos }) {
+      state.record.tournament.stages[nextStage][indexDuel][pos] = winnerId;
+    },
+    //
+    // ???
+    tournamentCanSave(state, canSave) {
+      state.record.tournament.readyToSave = canSave;
+    },
+    /// END ???
+    resetTornamentRecord(state) {
+      state.record.tournament = {
+        type: "classic",
+        players: [],
+        stages: [],
+        currentDuel: {
+          id1: 0,
+          id2: 0,
+        },
+        readyToSave: false,
+      };
     },
   },
   actions: {
@@ -139,8 +165,34 @@ export default createStore({
       });
     },
 
+    async createTournament({ state, commit }) {
+      let tournament = {
+        number_participants: state.record.tournament.players.length,
+        type: state.record.tournament.type,
+        duels: [],
+      };
+      state.record.tournament.stages.forEach((duels) => {
+        tournament.duels = tournament.duels.concat(duels);
+      });
+      for (let index = 0; index < tournament.duels.length; index++) {
+        tournament.duels[index] = {
+          id_first: tournament.duels[index].id1,
+          id_second: tournament.duels[index].id2,
+          score_first: tournament.duels[index].score1,
+          score_second: tournament.duels[index].score2,
+          index_duel: index,
+        };
+      }
+
+      let token = localStorage.getItem("clubToken");
+
+      await api.requestToApiByAdmin("POST", "create/tournament", JSON.parse(token), tournament).then((data) => {
+        commit("resetTornamentRecord");
+      });
+    },
+
     // record Duels, Tournaments into store
-    recordDuel({ commit }, duel) {},
+    // recordDuel({ commit }, duel) {},
     recordTournament({ commit }, tournamentPlayers) {
       commit("recordTournamentPlayers", tournamentPlayers);
       let currentStage = 0;
@@ -170,6 +222,29 @@ export default createStore({
         playersLeft = playersLeft / 2;
         currentStage++;
       } while (!(playersLeft == 1));
+    },
+    handlingTournamentDuelResult({ commit, state }, { score, stage, indexDuel, winnerId }) {
+      commit("setResultTournamentDuel", {
+        score,
+        stage,
+        indexDuel,
+      });
+      let pos = "";
+      if (indexDuel % 2 == 0) {
+        pos = "id1";
+      } else {
+        pos = "id2";
+      }
+      if (Number(stage) + 1 == state.record.tournament.stages.length) {
+        commit("tournamentCanSave", true);
+      } else {
+        commit("movingPlayerToNextStage", {
+          nextStage: Number(stage) + 1,
+          indexDuel: Math.floor(indexDuel / 2),
+          winnerId,
+          pos,
+        });
+      }
     },
   },
 });
