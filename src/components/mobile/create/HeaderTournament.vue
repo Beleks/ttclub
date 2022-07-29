@@ -10,6 +10,7 @@ export default {
   computed: {},
   methods: {
     cancelCreate() {
+      this.$store.commit("resetTornamentRecord");
       this.$router.replace({ name: "Club" });
     },
   },
