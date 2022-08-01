@@ -17,7 +17,11 @@
         </div>
       </div>
       <div class="mb-3" v-for="item in categoryItems" :key="item.id">
-        <component :is="categoryItemsComponent" :item="item" />
+        <component
+          :is="categoryItemsComponent"
+          :item="item"
+          @click="moreInfo(item)"
+        />
       </div>
     </template>
   </div>
@@ -65,6 +69,14 @@ export default {
   methods: {
     changeCategory(category) {
       this.activeCategory = category;
+    },
+    moreInfo(item) {
+      if (this.activeCategory === "tournaments") {
+        this.$router.push({
+          path: `history/tournament/${item.id}`,
+          query: { stage: 0 },
+        });
+      }
     },
   },
 };

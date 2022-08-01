@@ -33,6 +33,9 @@ export default createStore({
     getPlayerById: (state) => (idPlayer) => {
       return state.currentClub.players.find((player) => player.id === idPlayer);
     },
+    getTournamentById: (state) => (idTournament) => {
+      return state.currentClub.history.tournaments.find((tournament) => tournament.id == idTournament);
+    },
   },
   mutations: {
     verifyAuth(state, isAuth) {
@@ -52,6 +55,9 @@ export default createStore({
     },
     setClubTournaments(state, tournaments) {
       state.currentClub.history.tournaments = tournaments;
+    },
+    setClubTournamentsInfo(state, { idTournament, stages }) {
+      state.currentClub.history.tournaments.find((tournament) => tournament.id == idTournament).stages = stages;
     },
 
     // record Duels, Tournaments into store
@@ -145,6 +151,47 @@ export default createStore({
     async getTournaments({ commit }, idClub) {
       await api.requestToApi("GET", `${idClub}/tournaments`).then((data) => {
         commit("setClubTournaments", data.data);
+      });
+    },
+    async getTournamentInfo({ commit, state }, idTournament) {
+      await api.requestToApi("GET", `tournaments/${idTournament}/duelsinfo`).then((data) => {
+        let begin = 1;
+        let duelsInStage = 1;
+        let editedDuels = 0;
+        let stages = data.data;
+
+        // change keys
+        stages.forEach((duel) => {
+          duel.id1 = duel.id_first;
+          duel.id2 = duel.id_second;
+          duel.score1 = duel.score_first;
+          duel.score2 = duel.score_second;
+          // delete
+          delete duel.id_first;
+          delete duel.id_second;
+          delete duel.score_first;
+          delete duel.score_second;
+        });
+        // ===
+
+        stages.reverse();
+
+        let duels = [];
+        do {
+          editedDuels = editedDuels + duelsInStage;
+          let stageDuels = stages.slice(begin - 1, begin + duelsInStage - 1);
+          duels.push(stageDuels);
+          duelsInStage *= 2;
+          begin *= 2;
+        } while (editedDuels < stages.length);
+
+        stages = duels;
+        stages.reverse();
+
+        commit("setClubTournamentsInfo", {
+          idTournament,
+          stages,
+        });
       });
     },
 

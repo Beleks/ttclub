@@ -47,7 +47,7 @@ const routes = [
             component: () => import("../views/mobile/History.vue"),
           },
           {
-            path: "history/tournament",
+            path: "history/tournament/:idTournament",
             name: "HistoryTournament",
             component: () => import("../views/mobile/HistoryTournament.vue"),
           },
@@ -86,8 +86,7 @@ const routes = [
               {
                 path: "grid",
                 name: "CreateTournamentGrid",
-                component: () =>
-                  import("../views/mobile/CreateTournamentGrid.vue"),
+                component: () => import("../views/mobile/CreateTournamentGrid.vue"),
               },
               {
                 path: "duel",

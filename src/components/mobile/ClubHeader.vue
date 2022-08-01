@@ -4,6 +4,9 @@
     <div v-if="isMenuOpen" @click="closeMenu()">Назад</div>
     <div v-if="mainPage" @click="openMenu()">Меню</div>
     <div v-if="pagePlayers" @click="backToMenu()">Назад</div>
+    <!-- Back from tournament  -->
+    <div v-if="historyTournament" @click="backToHistory()">Назад</div>
+    <!--  -->
   </div>
 </template>
 
@@ -19,6 +22,9 @@ export default {
     pagePlayers() {
       return this.$route.name === "MenuPlayers";
     },
+    historyTournament() {
+      return this.$route.name === "HistoryTournament";
+    },
   },
   methods: {
     openMenu() {
@@ -29,6 +35,9 @@ export default {
     },
     backToMenu() {
       this.$router.replace({ name: "Menu" });
+    },
+    backToHistory() {
+      this.$router.back();
     },
   },
 };
