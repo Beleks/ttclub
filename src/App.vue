@@ -43,6 +43,10 @@ export default {
 #app {
   /* margin-top: 60px; */
 }
+input {
+  /* all: unset; */
+  outline: none;
+}
 .svg {
   display: flex;
   align-items: center;

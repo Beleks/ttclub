@@ -1,7 +1,6 @@
 <template>
-  <div class="flex justify-center pt-6">
-    <div>Desktop</div>
-    <div class="ml-6 px-2 bg-indigo-500 text-white rounded">В разработке</div>
+  <div class="">
+    <router-view></router-view>
   </div>
 </template>
 

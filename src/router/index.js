@@ -103,7 +103,22 @@ const routes = [
     path: "/",
     name: "Desktop",
     beforeEnter: [widthCheck],
+    redirect: () => {
+      return { name: "Hello_d" };
+    },
     component: () => import("../views/desktop/Desktop.vue"),
+    children: [
+      {
+        path: "hello",
+        name: "Hello_d",
+        component: () => import("../views/desktop/Hello.vue"),
+      },
+      {
+        path: "duel",
+        name: "Club_d",
+        component: () => import("../views/desktop/Club.vue"),
+      },
+    ],
   },
   {
     path: "/login",
