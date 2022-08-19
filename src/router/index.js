@@ -121,17 +121,17 @@ const routes = [
           {
             path: "rating",
             name: "Rating_d",
-            component: () => import("../views/mobile/Rating.vue"),
+            component: () => import("../views/desktop/Rating.vue"),
           },
           {
             path: "history",
             name: "History_d",
-            component: () => import("../views/mobile/History.vue"),
+            component: () => import("../views/desktop/History.vue"),
           },
           {
             path: "menu/players",
             name: "MenuPlayer_d",
-            component: () => import("../views/mobile/MenuPlayers.vue"),
+            component: () => import("../views/desktop/MenuPlayers.vue"),
           },
         ],
       },

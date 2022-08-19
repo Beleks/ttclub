@@ -5,9 +5,10 @@
       <div class="flex items-center h-20 px-8 border-b-2 border-white">
         header
       </div>
-      <div class="flex p-8">
+      <div class="flex p-6 px-8">
         <!-- <span></span> -->
-        <div class="px-2 bg-indigo-500 text-white rounded">В разработке</div>
+        <!-- <div class="px-2 bg-indigo-500 text-white rounded">В разработке</div> -->
+        <p></p>
         <router-view></router-view>
       </div>
     </div>

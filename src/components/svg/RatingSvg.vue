@@ -22,9 +22,18 @@
   </div>
 </template>
 <script>
+//:fill="color"
 // fill="#E5E5E5"
 
-export default {};
+export default {
+  props: {
+    size: Number,
+    color: {
+      type: String,
+      default: "white",
+    },
+  },
+};
 </script>
 
 <style>
