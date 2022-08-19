@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-screen flex-col justify-between py-8 px-14">
+  <div class="flex h-screen flex-col justify-between py-8 px-14 bg-slate-50">
     <div class="flex justify-between">
       <div class="flex items-center">
         <div class="font-medium text-2xl">
@@ -33,7 +33,7 @@
           <input
             type="text"
             class="
-              bg-gray-50
+              bg-white
               border border-gray-300
               rounded
               focus:ring-indigo-500 focus:border-indigo-500
@@ -116,7 +116,7 @@ export default {
     },
     chooseClub(idClub) {
       // SET REPLACE
-      this.$router.push({ name: "Club", params: { id: idClub } });
+      this.$router.push({ name: "Club_d", params: { id: idClub } });
     },
   },
   mounted() {

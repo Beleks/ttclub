@@ -114,9 +114,26 @@ const routes = [
         component: () => import("../views/desktop/Hello.vue"),
       },
       {
-        path: "duel",
+        path: ":id",
         name: "Club_d",
         component: () => import("../views/desktop/Club.vue"),
+        children: [
+          {
+            path: "rating",
+            name: "Rating_d",
+            component: () => import("../views/mobile/Rating.vue"),
+          },
+          {
+            path: "history",
+            name: "History_d",
+            component: () => import("../views/mobile/History.vue"),
+          },
+          {
+            path: "menu/players",
+            name: "MenuPlayer_d",
+            component: () => import("../views/mobile/MenuPlayers.vue"),
+          },
+        ],
       },
     ],
   },
