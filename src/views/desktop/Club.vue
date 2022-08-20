@@ -2,13 +2,34 @@
   <div class="flex">
     <ClubSidebar />
     <div class="w-full">
-      <div class="flex items-center h-20 px-8 border-b-2 border-white">
-        header
+      <div
+        class="
+          flex
+          items-center
+          justify-between
+          h-20
+          px-8
+          border-b-2 border-white
+        "
+      >
+        <div>
+          <div
+            class="
+              bg-gray-400
+              py-1
+              px-3
+              w-36
+              rounded
+              text-gray-300
+              cursor-not-allowed
+            "
+          >
+            Создать
+          </div>
+        </div>
+        <div class="off cursor-not-allowed">Вход</div>
       </div>
       <div class="flex p-6 px-8">
-        <!-- <span></span> -->
-        <!-- <div class="px-2 bg-indigo-500 text-white rounded">В разработке</div> -->
-        <p></p>
         <router-view></router-view>
       </div>
     </div>
@@ -18,12 +39,30 @@
 <script>
 import ClubSidebar from "../../components/desktop/ClubSidebar.vue";
 
+import { getCurrentIdClub } from "../../mixins/index";
+
 export default {
-  components: {
-    ClubSidebar,
+  components: { ClubSidebar },
+  mixins: [getCurrentIdClub],
+  computed: {
+    isClubHomePage() {
+      const routeName = this.$route.name;
+      return routeName === "Rating" || routeName === "History";
+    },
+  },
+  mounted() {
+    const idClub = this.getCurrentIdClub();
+
+    // this.$store.dispatch("verifyAuth", idClub);
+    this.$store.dispatch("getPlayers", idClub);
+    this.$store.dispatch("getDuels", idClub);
+    this.$store.dispatch("getTournaments", idClub);
   },
 };
 </script>
 
-<style>
+<style scoped>
+.off {
+  color: rgba(128, 128, 128, 0.5);
+}
 </style>

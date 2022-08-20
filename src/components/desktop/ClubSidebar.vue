@@ -64,7 +64,6 @@ export default {
   },
   computed: {
     activeMenuItem() {
-      console.log(this.$route.name);
       return this.$route.name;
     },
   },

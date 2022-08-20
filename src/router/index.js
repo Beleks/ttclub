@@ -116,6 +116,9 @@ const routes = [
       {
         path: ":id",
         name: "Club_d",
+        redirect: () => {
+          return { name: "Rating_d" };
+        },
         component: () => import("../views/desktop/Club.vue"),
         children: [
           {
