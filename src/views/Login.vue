@@ -1,11 +1,11 @@
 <template>
-  <div class="h-screen flex flex-col justify-between p-6">
+  <div class="h-screen md:w-96 md:m-auto p-6 flex flex-col justify-between">
     <div>
       <div class="text-2xl font-semibold">
         <span class="text-indigo-500">TT</span> Club
       </div>
       <div class="mt-4 px-2 rounded text-indigo-500 w-max m-auto bg-indigo-200">
-        v 0.1.14
+        {{ app_version }}
       </div>
       <div class="mt-12">
         <div class="mb-2">
@@ -37,14 +37,24 @@
           />
         </div>
       </div>
-      <div class="mt-6 w-max m-auto underline" @click="loginAsGuest()">
+      <div
+        class="mt-6 w-max m-auto underline cursor-pointer"
+        @click="loginAsGuest()"
+      >
         Войти как гость
       </div>
     </div>
     <div>
       <!-- + Ошбика входа -->
       <div
-        class="text-slate-100 bg-indigo-500 py-2 rounded"
+        class="
+          md:w-80 md:m-auto
+          cursor-pointer
+          text-slate-100
+          bg-indigo-500
+          py-2
+          rounded
+        "
         @click="loginAsAdmin()"
       >
         {{ status }}
@@ -61,6 +71,7 @@ export default {
       login: "",
       password: "",
       status: "Вход",
+      app_version: __APP_VERSION__,
     };
   },
   methods: {
@@ -91,4 +102,7 @@ input {
   /* min-width: calc(100% - 1.5rem); */
   min-width: 100%;
 }
+/* @media screen and (min-width: 800px) {
+  
+} */
 </style>

@@ -27,7 +27,7 @@
             Создать
           </div>
         </div>
-        <div class="off cursor-not-allowed">Вход</div>
+        <div class="off cursor-not-allowed" @click="goLogin()">Вход</div>
       </div>
       <div class="flex p-6 px-8">
         <router-view></router-view>
@@ -48,6 +48,13 @@ export default {
     isClubHomePage() {
       const routeName = this.$route.name;
       return routeName === "Rating" || routeName === "History";
+    },
+  },
+  methods: {
+    goLogin() {
+      this.$router.push({
+        name: "Login",
+      });
     },
   },
   mounted() {
