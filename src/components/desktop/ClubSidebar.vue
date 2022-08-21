@@ -1,22 +1,20 @@
 <template>
   <div class="w-60 bg-white h-screen pb-6 px-4 flex flex-col">
-    <div class="text-2xl py-6">Club Title</div>
+    <div class="text-2xl my-6 cursor-pointer" @click="goHome()">Club Title</div>
     <div class="mt-6">
       <div
         v-for="menuItem in menuItems"
         :key="menuItem.name"
         :class="[
-          { 'bg-indigo-500 text-white': activeMenuItem === menuItem.name },
+          activeMenuItem === menuItem.name
+            ? 'bg-indigo-100 text-indigo-500 stroke-indigo-500 fill-indigo-500'
+            : 'stroke-slate-900',
+
           'flex cursor-pointer px-4 py-1 rounded mb-2',
         ]"
         @click="choseTab(menuItem.name)"
       >
-        <template v-if="activeMenuItem === menuItem.name">
-          <component :is="menuItem.svg" :color="'white'"></component>
-        </template>
-        <template v-else>
-          <component :is="menuItem.svg" :color="'white'"></component>
-        </template>
+        <component :is="menuItem.svg"></component>
         <div class="ml-2">
           <!-- translate menuItem ?-->
           {{ menuItem.title }}
@@ -74,6 +72,11 @@ export default {
           name: pathName,
         });
       }
+    },
+    goHome() {
+      this.$router.replace({
+        name: "Hello_d",
+      });
     },
   },
 };
