@@ -73,7 +73,7 @@
           <ArrowDownSvg :color="'white'" />
         </template>
         <template v-else>
-          <CreateSvg />
+          <CreateSvg class="fill-white" />
         </template>
       </div>
       <transition name="list">

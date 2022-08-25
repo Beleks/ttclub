@@ -1,15 +1,119 @@
 <template>
-  <div>
-    Players
+  <div class="w-full">
+    <template v-if="playerCreation">
+      <!-- created -->
+      <div class="flex justify-between items-center mb-4">
+        <div class="flex items-center">
+          <div class="rotate-45 cursor-pointer" @click="cancelCreation()">
+            <CreateSvg class="fill-slate-900" />
+          </div>
+          <div class="ml-2 text-slate-500">Добавление новых игроков...</div>
+        </div>
+        <div
+          class="bg-indigo-500 py-1 px-6 w-36 rounded cursor-pointer text-white"
+          @click="createPlayer()"
+        >
+          Создать
+        </div>
+      </div>
+      <div
+        class="flex mb-4"
+        v-for="(player, index) in playerForCreated"
+        :key="index"
+      >
+        <div class="grow pr-4">
+          <input
+            class="px-4 py-2 w-full"
+            type="text"
+            v-model="player.surname"
+            placeholder="Фамилия*"
+          />
+        </div>
+        <div class="grow pr-4">
+          <input
+            class="px-4 py-2 w-full"
+            type="text"
+            v-model="player.name"
+            placeholder="Имя*"
+          />
+        </div>
+        <div class="grow">
+          <input
+            class="px-4 py-2 w-full"
+            type="text"
+            v-model="player.patronymic"
+            placeholder="Отчество"
+          />
+        </div>
+      </div>
+      <div>
+        <!-- more player -->
+      </div>
+    </template>
+    <template v-else>
+      <div class="flex justify-between items-center pr-4 mb-4">
+        <div
+          class="bg-indigo-500 py-1 px-6 rounded cursor-pointer text-white"
+          @click="toCreatePlayer()"
+        >
+          Добавить игрока
+        </div>
+        <div>{{ players.length }}/50</div>
+      </div>
+      <div
+        v-for="player in players"
+        :key="player.id"
+        class="bg-white py-2 px-4 mb-3 flex justify-between"
+      >
+        <div>
+          {{ player.surname }} {{ player.name }} {{ player.patronymic }}
+        </div>
+        <div>ред.</div>
+      </div>
+    </template>
   </div>
 </template>
 
 <script>
-export default {
+import CreateSvg from "../../components/svg/CreateSvg.vue";
 
-}
+export default {
+  components: {
+    CreateSvg,
+  },
+  data() {
+    return {
+      playerCreation: false,
+      playerForCreated: [{ name: "", surname: "", patronymic: "" }],
+    };
+  },
+  computed: {
+    players() {
+      return this.$store.state.currentClub.players;
+    },
+  },
+  methods: {
+    toCreatePlayer() {
+      this.playerCreation = true;
+    },
+    createPlayer() {
+      this.$store
+        .dispatch("createPlayer", {
+          surname: this.playerForCreated[0].surname,
+          name: this.playerForCreated[0].name,
+          patronymic: this.playerForCreated[0].patronymic,
+        })
+        .then(() => {
+          // getPlayers
+          this.playerCreation = false;
+        });
+    },
+    cancelCreation() {
+      this.playerCreation = false;
+    },
+  },
+};
 </script>
 
 <style>
-
 </style>
