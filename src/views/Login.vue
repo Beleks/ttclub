@@ -89,7 +89,7 @@ export default {
           password: this.password,
         })
         .then(() => {
-          let id = this.$store.state.admin.idClub;
+          let id = this.$store.state.admin.id;
           this.$router.replace({ name: "Club", params: { id } });
         });
     },

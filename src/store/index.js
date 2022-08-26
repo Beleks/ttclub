@@ -4,7 +4,7 @@ import api from "../api.js";
 export default createStore({
   state: {
     admin: {
-      idClub: null,
+      id: null,
     },
     isAuth: false,
     clubs: [],
@@ -38,11 +38,12 @@ export default createStore({
     },
   },
   mutations: {
-    verifyAuth(state, isAuth) {
+    verifyAuth(state, { isAuth, clubInfo }) {
+      state.admin = clubInfo;
       state.isAuth = isAuth;
     },
     setClubId(state, id) {
-      state.admin.idClub = id;
+      state.admin.id = id;
     },
     setClubs(state, clubs) {
       state.clubs = clubs;
@@ -119,7 +120,7 @@ export default createStore({
 
       if (token) {
         await api.requestToApiByAdmin("POST", "auth/me", JSON.parse(token)).then((data) => {
-          commit("verifyAuth", data.id == idClub);
+          commit("verifyAuth", { isAuth: data.id == idClub, clubInfo: data });
         });
       }
     },
@@ -128,7 +129,7 @@ export default createStore({
 
       await api.requestToApiByAdmin("POST", "auth/logout", JSON.parse(token)).then((data) => {
         localStorage.removeItem("clubToken");
-        commit("verifyAuth", false);
+        commit("verifyAuth", { isAuth: false, clubInfo: data });
       });
     },
 
