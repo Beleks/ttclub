@@ -204,6 +204,13 @@ export default createStore({
         console.log("created");
       });
     },
+    async editPlayer({ commit }, { idPlayer, player }) {
+      let token = localStorage.getItem("clubToken");
+
+      await api.requestToApiByAdmin("PATCH", `edit/player/${idPlayer}`, JSON.parse(token), player).then((data) => {
+        console.log("created");
+      });
+    },
 
     async createDuel({ commit }, duel) {
       let token = localStorage.getItem("clubToken");

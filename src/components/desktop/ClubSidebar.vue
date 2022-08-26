@@ -6,13 +6,13 @@
         v-for="menuItem in menuItems"
         :key="menuItem.name"
         :class="[
-          activeMenuItem === menuItem.name
+          menuItem.name.includes(activeMenuItem)
             ? 'bg-indigo-100 text-indigo-500 stroke-indigo-500 fill-indigo-500'
             : 'stroke-slate-900',
 
           'flex cursor-pointer px-4 py-1 rounded mb-2',
         ]"
-        @click="choseTab(menuItem.name)"
+        @click="choseTab(menuItem.name[0])"
       >
         <component :is="menuItem.svg"></component>
         <div class="ml-2">
@@ -42,17 +42,17 @@ export default {
     return {
       menuItems: [
         {
-          name: "Rating_d",
+          name: ["Rating_d"],
           svg: "RatingSvg",
           title: "Рейтинг",
         },
         {
-          name: "History_d",
+          name: ["History_d"],
           svg: "HistorySvg",
           title: "История",
         },
         {
-          name: "MenuPlayer_d",
+          name: ["Players_d", "PlayerEdit_d"],
           svg: "UserSvg",
           title: "Игроки",
         },

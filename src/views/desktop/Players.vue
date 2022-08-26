@@ -58,28 +58,42 @@
         >
           Добавить игрока
         </div>
-        <div>{{ players.length }}/50</div>
+        <div class="text-slate-600">{{ players.length }}/50</div>
       </div>
       <div
         v-for="player in players"
         :key="player.id"
-        class="bg-white py-2 px-4 mb-3 flex justify-between"
+        class="group bg-white py-2 px-4 mb-3 flex justify-between"
       >
-        <div>
+        <div class="">
           {{ player.surname }} {{ player.name }} {{ player.patronymic }}
         </div>
-        <div>ред.</div>
+        <div>
+          <EditSvg
+            class="
+              stroke-slate-600
+              group-hover:opacity-100
+              opacity-0
+              cursor-pointer
+              transition-opacity
+              ease-in-out
+            "
+            @click="toEditPlayer(player.id)"
+          />
+        </div>
       </div>
     </template>
   </div>
 </template>
 
 <script>
+import EditSvg from "../../components/svg/EditSvg.vue";
 import CreateSvg from "../../components/svg/CreateSvg.vue";
 
 export default {
   components: {
     CreateSvg,
+    EditSvg,
   },
   data() {
     return {
@@ -95,6 +109,14 @@ export default {
   methods: {
     toCreatePlayer() {
       this.playerCreation = true;
+    },
+    toEditPlayer(idPlayer) {
+      this.$router.push({
+        name: "PlayerEdit_d",
+        params: {
+          idPlayer,
+        },
+      });
     },
     createPlayer() {
       this.$store

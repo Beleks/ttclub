@@ -132,9 +132,14 @@ const routes = [
             component: () => import("../views/desktop/History.vue"),
           },
           {
-            path: "menu/players",
-            name: "MenuPlayer_d",
-            component: () => import("../views/desktop/MenuPlayers.vue"),
+            path: "players",
+            name: "Players_d",
+            component: () => import("../views/desktop/Players.vue"),
+          },
+          {
+            path: "players/:idPlayer/edit",
+            name: "PlayerEdit_d",
+            component: () => import("../views/desktop/PlayerEdit.vue"),
           },
         ],
       },
