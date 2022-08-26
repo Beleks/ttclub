@@ -14,6 +14,7 @@
       >
         <div>
           <div
+            v-if="isAuth"
             class="
               bg-gray-400
               py-1
@@ -26,8 +27,26 @@
           >
             Создать
           </div>
+          <div v-else class="text-gray-300">Вы вошли как гость</div>
         </div>
-        <div class="off cursor-not-allowed" @click="goLogin()">Вход</div>
+        <template v-if="isAuth">
+          <div class="flex">
+            <div class="mr-4">{{ adminLogin.login }}</div>
+            <div
+              class="cursor-pointer text-slate-500 hover:text-slate-900"
+              @click="logout()"
+            >
+              Выход
+            </div>
+          </div>
+        </template>
+        <div
+          v-else
+          class="cursor-pointer text-slate-500 hover:text-slate-900"
+          @click="goLogin()"
+        >
+          Вход
+        </div>
       </div>
       <div class="flex p-6 px-8">
         <router-view></router-view>
@@ -45,9 +64,15 @@ export default {
   components: { ClubSidebar },
   mixins: [getCurrentIdClub],
   computed: {
+    isAuth() {
+      return this.$store.state.isAuth;
+    },
     isClubHomePage() {
       const routeName = this.$route.name;
       return routeName === "Rating" || routeName === "History";
+    },
+    adminLogin() {
+      return this.$store.state.admin;
     },
   },
   methods: {
@@ -56,11 +81,16 @@ export default {
         name: "Login",
       });
     },
+    logout() {
+      this.$store.dispatch("logout").then(() => {
+        this.$router.replace({ name: "Login" });
+      });
+    },
   },
   mounted() {
     const idClub = this.getCurrentIdClub();
 
-    // this.$store.dispatch("verifyAuth", idClub);
+    this.$store.dispatch("verifyAuth", idClub);
     this.$store.dispatch("getPlayers", idClub);
     this.$store.dispatch("getDuels", idClub);
     this.$store.dispatch("getTournaments", idClub);
