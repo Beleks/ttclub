@@ -8,7 +8,7 @@
           class="flex justify-between bg-white py-2 px-3 rounded mt-3"
           @click="showClubPlayers()"
         >
-          <div class="flex">
+          <div class="flex stroke-slate-900">
             <UserSvg />
             <span class="ml-2">Игроки</span>
           </div>
