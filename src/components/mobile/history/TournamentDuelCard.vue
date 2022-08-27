@@ -3,10 +3,13 @@
     <div
       v-if="duel.id1"
       class="flex"
-      :class="{ ['text-indigo-500']: duel.score1 > duel.score2 }"
+      :class="{ 'text-indigo-500': duel.score1 > duel.score2 }"
     >
       <div class="py-1 px-3">{{ duel.score1 }}</div>
-      <div class="rounded-t bg-white flex justify-between grow px-2 py-1">
+      <div
+        class="rounded-t flex justify-between grow px-2 py-1"
+        :class="[duel.score1 > duel.score2 ? 'bg-indigo-100' : 'bg-white']"
+      >
         <span> {{ players.p1.name }} {{ players.p1.surname }} </span>
         <span>{{ Math.floor(players.p1.rating) }}</span>
       </div>
@@ -31,13 +34,12 @@
     <div
       v-if="duel.id2"
       class="flex"
-      :class="{ ['text-indigo-500']: duel.score2 > duel.score1 }"
+      :class="{ 'text-indigo-500': duel.score2 > duel.score1 }"
     >
       <div class="py-1 px-3">{{ duel.score2 }}</div>
       <div
         class="
           rounded-b
-          bg-white
           flex
           justify-between
           grow
@@ -45,6 +47,7 @@
           py-1
           shadow-lg shadow-slate-100/50
         "
+        :class="[duel.score2 > duel.score1 ? 'bg-indigo-100' : 'bg-white']"
       >
         <span> {{ players.p2.name }} {{ players.p2.surname }} </span>
         <span>{{ Math.floor(players.p2.rating) }}</span>

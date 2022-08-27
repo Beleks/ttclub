@@ -16,6 +16,7 @@
             py-2
             text-left
           "
+          :class="[{ 'border-b-2 border-b-indigo-500': isWinner }]"
         >
           <span>{{ players.p1.surname }} {{ players.p1.name }}</span>
           <span>{{ Math.floor(item.rating_first) }}</span>
@@ -40,6 +41,7 @@
             py-2
             text-left
           "
+          :class="[{ 'border-b-2 border-b-indigo-500': !isWinner }]"
         >
           <span>{{ players.p2.surname }} {{ players.p2.name }}</span>
           <span>{{ Math.floor(item.rating_second) }}</span>
