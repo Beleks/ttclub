@@ -7,12 +7,21 @@
       </div>
       <div>Рейтинг</div>
     </div>
-    <PlayerCard
-      v-for="(player, index) in players"
-      :key="player.id"
-      :player="player"
-      :position="index + 1"
-    />
+    <div v-if="players.length">
+      <PlayerCard
+        v-for="(player, index) in players"
+        :key="player.id"
+        :player="player"
+        :position="index + 1"
+      />
+    </div>
+    <div v-else>
+      <div
+        v-for="n in 4"
+        :key="n"
+        class="animate-pulse rounded bg-slate-200 py-2 px-2 mb-3 h-10"
+      ></div>
+    </div>
   </div>
 </template>
 

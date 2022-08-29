@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white py-2 px-2 mb-3">
+  <div class="bg-white py-2 px-2 mb-3 rounded">
     <div
       @click.prevent="openCard()"
       :class="[
