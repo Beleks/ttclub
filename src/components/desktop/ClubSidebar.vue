@@ -1,26 +1,29 @@
 <template>
   <div class="w-60 bg-white h-screen pb-6 px-4 flex flex-col select-none">
     <div class="text-2xl my-6 cursor-pointer" @click="goHome()">Club Title</div>
-    <div class="mt-6">
-      <div
-        v-for="menuItem in menuItems"
-        :key="menuItem.name[0]"
-        :class="[
-          menuItem.name.includes(activeMenuItem)
-            ? 'bg-indigo-100 text-indigo-500 stroke-indigo-500 fill-indigo-500'
-            : 'stroke-slate-900',
+    <div v-if="!verification" class="mt-6">
+      <TransitionGroup name="tab" appear>
+        <div
+          v-for="menuItem in menuItems"
+          :key="menuItem.name[0]"
+          :class="[
+            menuItem.name.includes(activeMenuItem)
+              ? 'bg-indigo-100 text-indigo-500 stroke-indigo-500 fill-indigo-500'
+              : 'stroke-slate-900',
 
-          'flex cursor-pointer px-4 py-1 rounded mb-2',
-        ]"
-        @click="choseTab(menuItem.name[0])"
-      >
-        <component :is="menuItem.svg"></component>
-        <div class="ml-2">
-          <!-- translate menuItem ?-->
-          {{ menuItem.title }}
+            'flex cursor-pointer px-4 py-1 rounded mb-2',
+          ]"
+          @click="choseTab(menuItem.name[0])"
+        >
+          <component :is="menuItem.svg"></component>
+          <div class="ml-2">
+            <!-- translate menuItem ?-->
+            {{ menuItem.title }}
+          </div>
         </div>
-      </div>
-      <TransitionGroup name="tab">
+      </TransitionGroup>
+
+      <TransitionGroup name="tab" appear>
         <template v-if="isAuth">
           <div
             v-for="menuItem in menuItemsAdmin"
@@ -57,6 +60,9 @@ import UserSvg from "../svg/UserSvg.vue";
 import { authMixin } from "../../mixins/auth";
 
 export default {
+  props: {
+    verification: Boolean,
+  },
   mixins: [authMixin],
   components: {
     RatingSvg,

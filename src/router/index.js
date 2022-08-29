@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import store from "../store";
 
 // after hooks
 
@@ -12,6 +13,18 @@ function widthCheck(to) {
     return { name: "Mobile" };
   }
 }
+
+// function verifyAuth(to) {
+//   // await
+//   store.dispatch("verifyAuth", to.params.id).then(() => {
+//     console.log("verifyAuth beforeEnter");
+//     return true;
+
+//     // return { path: to.path };
+//   });
+//   // console.log(store.state, "this");
+//   // console.log(to);
+// }
 
 const routes = [
   {
@@ -119,6 +132,7 @@ const routes = [
         redirect: () => {
           return { name: "Rating_d" };
         },
+        // beforeEnter: [verifyAuth],
         component: () => import("../views/desktop/Club.vue"),
         children: [
           {
@@ -166,5 +180,22 @@ const router = createRouter({
   // base: process.env.BASE_URL,
   routes,
 });
+
+// router.beforeEach(async (to, from) => {
+//   let name = to.matched[1].name;
+//   if (name == "Club_d" || name == "Club") {
+//     store.dispatch("verifyAuth", to.params.id).then(() => {
+//       console.log("club");
+//     });
+//     // не ждёт
+//     return false;
+
+//     console.log("after");
+//   } else {
+//     console.log("club1231");
+
+//     return true;
+//   }
+// });
 
 export default router;

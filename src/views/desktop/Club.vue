@@ -1,6 +1,6 @@
 <template>
   <div class="flex">
-    <ClubSidebar />
+    <ClubSidebar :verification="verification" />
     <div class="w-full">
       <div
         class="
@@ -12,43 +12,45 @@
           border-b-2 border-white
         "
       >
-        <div>
-          <Transition name="adm" mode="out-in">
-            <div
-              v-if="isAuth"
-              class="
-                bg-gray-400
-                py-1
-                px-3
-                w-36
-                rounded
-                text-gray-300
-                cursor-not-allowed
-              "
-            >
-              Создать
+        <template v-if="!verification">
+          <div>
+            <Transition name="adm" mode="out-in" appear>
+              <div
+                v-if="isAuth"
+                class="
+                  bg-gray-400
+                  py-1
+                  px-3
+                  w-36
+                  rounded
+                  text-gray-300
+                  cursor-not-allowed
+                "
+              >
+                Создать
+              </div>
+              <div v-else class="text-gray-300">Вы вошли как гость</div>
+            </Transition>
+          </div>
+          <Transition name="adm" mode="out-in" appear>
+            <div v-if="isAuth" class="flex">
+              <div class="mr-4">{{ adminLogin.login }}</div>
+              <div
+                class="cursor-pointer text-slate-500 hover:text-slate-900"
+                @click="logout()"
+              >
+                Выход
+              </div>
             </div>
-            <div v-else class="text-gray-300">Вы вошли как гость</div>
-          </Transition>
-        </div>
-        <Transition name="adm" mode="out-in">
-          <div v-if="isAuth" class="flex">
-            <div class="mr-4">{{ adminLogin.login }}</div>
             <div
+              v-else
               class="cursor-pointer text-slate-500 hover:text-slate-900"
-              @click="logout()"
+              @click="goLogin()"
             >
-              Выход
+              Вход
             </div>
-          </div>
-          <div
-            v-else
-            class="cursor-pointer text-slate-500 hover:text-slate-900"
-            @click="goLogin()"
-          >
-            Вход
-          </div>
-        </Transition>
+          </Transition>
+        </template>
       </div>
       <div class="flex p-6 px-8">
         <router-view></router-view>
@@ -65,6 +67,11 @@ import { getCurrentIdClub } from "../../mixins/index";
 export default {
   components: { ClubSidebar },
   mixins: [getCurrentIdClub],
+  data() {
+    return {
+      verification: true,
+    };
+  },
   computed: {
     isAuth() {
       return this.$store.state.isAuth;
@@ -92,7 +99,9 @@ export default {
   mounted() {
     const idClub = this.getCurrentIdClub();
 
-    this.$store.dispatch("verifyAuth", idClub);
+    this.$store.dispatch("verifyAuth", idClub).then(() => {
+      this.verification = false;
+    });
     this.$store.dispatch("getPlayers", idClub);
     this.$store.dispatch("getDuels", idClub);
     this.$store.dispatch("getTournaments", idClub);

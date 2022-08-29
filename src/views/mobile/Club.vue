@@ -18,6 +18,11 @@ import { getCurrentIdClub } from "../../mixins/index";
 export default {
   components: { ClubHeader, ClubFooter },
   mixins: [getCurrentIdClub],
+  data() {
+    return {
+      verification: true,
+    };
+  },
   computed: {
     isClubHomePage() {
       const routeName = this.$route.name;
@@ -27,7 +32,9 @@ export default {
   mounted() {
     const idClub = this.getCurrentIdClub();
 
-    this.$store.dispatch("verifyAuth", idClub);
+    this.$store.dispatch("verifyAuth", idClub).then(() => {
+      this.verification = false;
+    });
     this.$store.dispatch("getPlayers", idClub);
     this.$store.dispatch("getDuels", idClub);
     this.$store.dispatch("getTournaments", idClub);
