@@ -42,6 +42,17 @@ export default createStore({
       state.admin = clubInfo;
       state.isAuth = isAuth;
     },
+    // Clear Club info
+    clearClubInfo(state) {
+      state.currentClub = {
+        players: [],
+        history: {
+          duels: [],
+          tournaments: [],
+        },
+      };
+    },
+    //
     setClubId(state, id) {
       state.admin.id = id;
     },
@@ -132,7 +143,6 @@ export default createStore({
         commit("verifyAuth", { isAuth: false, clubInfo: data });
       });
     },
-
     // club
     async getClubs({ commit }) {
       await api.requestToApi("GET", "clubs").then((data) => {
@@ -196,7 +206,7 @@ export default createStore({
       });
     },
 
-    // club create
+    // club create/edit
     async createPlayer({ commit }, player) {
       let token = localStorage.getItem("clubToken");
 

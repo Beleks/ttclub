@@ -32,6 +32,9 @@ export default {
     this.$store.dispatch("getDuels", idClub);
     this.$store.dispatch("getTournaments", idClub);
   },
+  beforeRouteLeave(to, from) {
+    this.$store.commit("clearClubInfo");
+  },
 };
 </script>
 
