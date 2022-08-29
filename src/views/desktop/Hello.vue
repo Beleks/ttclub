@@ -81,7 +81,14 @@
           <ArrowRight1Svg class="fill-indigo-500" />
         </div>
       </div>
-      <template v-else> Загрузка клубов... </template>
+      <template v-else>
+        <div
+          class="animate-pulse bg-slate-200 h-10 rounded px-4 py-2 mb-3"
+        ></div>
+        <div
+          class="animate-pulse bg-slate-200 h-10 rounded px-4 py-2 mb-3"
+        ></div>
+      </template>
     </div>
     <div class="underline cursor-pointer mx-auto">О приложении</div>
   </div>

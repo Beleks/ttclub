@@ -13,24 +13,26 @@
         "
       >
         <div>
-          <div
-            v-if="isAuth"
-            class="
-              bg-gray-400
-              py-1
-              px-3
-              w-36
-              rounded
-              text-gray-300
-              cursor-not-allowed
-            "
-          >
-            Создать
-          </div>
-          <div v-else class="text-gray-300">Вы вошли как гость</div>
+          <Transition name="adm" mode="out-in">
+            <div
+              v-if="isAuth"
+              class="
+                bg-gray-400
+                py-1
+                px-3
+                w-36
+                rounded
+                text-gray-300
+                cursor-not-allowed
+              "
+            >
+              Создать
+            </div>
+            <div v-else class="text-gray-300">Вы вошли как гость</div>
+          </Transition>
         </div>
-        <template v-if="isAuth">
-          <div class="flex">
+        <Transition name="adm" mode="out-in">
+          <div v-if="isAuth" class="flex">
             <div class="mr-4">{{ adminLogin.login }}</div>
             <div
               class="cursor-pointer text-slate-500 hover:text-slate-900"
@@ -39,14 +41,14 @@
               Выход
             </div>
           </div>
-        </template>
-        <div
-          v-else
-          class="cursor-pointer text-slate-500 hover:text-slate-900"
-          @click="goLogin()"
-        >
-          Вход
-        </div>
+          <div
+            v-else
+            class="cursor-pointer text-slate-500 hover:text-slate-900"
+            @click="goLogin()"
+          >
+            Вход
+          </div>
+        </Transition>
       </div>
       <div class="flex p-6 px-8">
         <router-view></router-view>
@@ -102,4 +104,14 @@ export default {
 .off {
   color: rgba(128, 128, 128, 0.5);
 }
+
+.adm-enter-active {
+  transition: opacity 0.5s ease;
+}
+
+.adm-enter-from,
+.adm-leave-to {
+  opacity: 0;
+}
 </style>
+
