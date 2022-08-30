@@ -7,11 +7,8 @@
     <meta name="yandex-verification" content="c27830e08dd25fae" />
     <title>Club TT</title>
 
-    <!-- PWA: Apple Touch Icon, and Service Worker registration. -->
-    <!-- Vite Plugin PWA will add the Web App Manifest during build -->
     <link rel="apple-touch-icon" href="/images/pwa/icon-192x192.png" />
     <script type="module">
-      // Register Service Worker using Vite Plugin PWA
       import { registerSW } from "virtual:pwa-register";
       registerSW();
     </script>
