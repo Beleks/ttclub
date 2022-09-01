@@ -78,7 +78,7 @@ export default {
           title: "Рейтинг",
         },
         {
-          name: ["History_d"],
+          name: ["History_d", "HistoryTournament_d"],
           svg: "HistorySvg",
           title: "История",
         },

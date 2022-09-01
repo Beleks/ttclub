@@ -71,13 +71,12 @@ export default {
       this.activeCategory = category;
     },
     moreInfo(item) {
-      // console.log("...");
-      // if (this.activeCategory === "tournaments") {
-      //   this.$router.push({
-      //     path: `history/tournament/${item.id}`,
-      //     query: { stage: 0 },
-      //   });
-      // }
+      if (this.activeCategory === "tournaments") {
+        this.$router.push({
+          path: `history/tournament/${item.id}`,
+          // query: { stage: 0 },
+        });
+      }
     },
   },
 };

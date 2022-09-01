@@ -9,6 +9,7 @@
       shadow-lg shadow-gray-100/50
       justify-between
       items-center
+      cursor-pointer
     "
   >
     <div class="flex items-center">

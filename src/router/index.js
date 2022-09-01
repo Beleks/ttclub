@@ -146,6 +146,11 @@ const routes = [
             component: () => import("../views/desktop/History.vue"),
           },
           {
+            path: "history/tournament/:idTournament",
+            name: "HistoryTournament_d",
+            component: () => import("../views/desktop/HistoryTournament.vue"),
+          },
+          {
             path: "players",
             name: "Players_d",
             component: () => import("../views/desktop/Players.vue"),
