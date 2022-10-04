@@ -2,14 +2,40 @@
   <div class="flex h-screen flex-col justify-between py-8 px-14 bg-slate-50">
     <div class="flex justify-between items-center">
       <div class="flex items-center">
-        <div class="font-medium text-2xl">
+        <div class="font-medium text-2xl font-bold">
           Club <span class="text-indigo-500">TT</span>
         </div>
         <div
-          class="ml-4 py-0.5 px-4 bg-indigo-100 rounded text-sm text-indigo-500"
+          class="
+            ml-4
+            py-0.5
+            px-4
+            bg-indigo-100
+            rounded
+            text-sm text-indigo-500
+            font-medium
+          "
         >
           {{ app_version }}
         </div>
+        <div class="ml-3 flex h-3 w-3">
+          <span
+            class="
+              animate-ping
+              absolute
+              inline-flex
+              h-3
+              w-3
+              rounded-full
+              bg-indigo-400
+              opacity-75
+            "
+          ></span>
+          <span
+            class="relative inline-flex rounded-full h-3 w-3 bg-indigo-400"
+          ></span>
+        </div>
+        <div class="ml-3 text-slate-600 font-bold">In development</div>
       </div>
       <div class="flex items-center">
         <template v-if="!verification">
@@ -25,6 +51,8 @@
                   cursor-pointer
                   text-white
                   mr-6
+                  transition
+                  hover:bg-indigo-600
                 "
                 @click="toCreateClub()"
               >
@@ -118,7 +146,9 @@
         ></div>
       </template>
     </div>
-    <div class="underline cursor-pointer mx-auto">О приложении</div>
+    <div class="text-slate-400 mx-auto">
+      By Aleksey Beletsky, Maxim Proidakov
+    </div>
   </div>
 </template>
 
@@ -151,7 +181,7 @@ export default {
   },
   methods: {
     toCreateClub() {
-      // К странице создания клуба
+      this.$router.push({ name: "NewClub" });
     },
     changeLocale(locale) {
       this.$i18n.locale = locale;
