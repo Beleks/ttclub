@@ -39,6 +39,7 @@
                 class="cursor-pointer text-slate-500 hover:text-slate-900"
                 @click="logout()"
               >
+              <!-- Заменить иконкой -->
                 Выход
               </div>
             </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="flex h-screen flex-col justify-between py-8 px-14 bg-slate-50">
-    <div class="flex justify-between">
+    <div class="flex justify-between items-center">
       <div class="flex items-center">
         <div class="font-medium text-2xl">
           Club <span class="text-indigo-500">TT</span>
@@ -11,19 +11,47 @@
           {{ app_version }}
         </div>
       </div>
-      <div>
-        <span
-          @click="changeLocale('en')"
-          :class="[{ [activeLocaleClass]: locale == 'en' }, ' cursor-pointer']"
-          >En</span
-        >
-        |
-        <span
-          @click="changeLocale('ru')"
-          :class="[{ [activeLocaleClass]: locale == 'ru' }, ' cursor-pointer']"
-        >
-          Ru
-        </span>
+      <div class="flex items-center">
+        <template v-if="!verification">
+          <div>
+            <Transition name="adm" mode="out-in" appear>
+              <div
+                v-if="!adminLogin.id"
+                class="
+                  bg-indigo-500
+                  py-1
+                  px-6
+                  rounded
+                  cursor-pointer
+                  text-white
+                  mr-6
+                "
+                @click="toCreateClub()"
+              >
+                Создать клуб
+              </div>
+            </Transition>
+          </div>
+          <Transition name="adm" mode="out-in" appear>
+            <div v-if="adminLogin.id" class="flex">
+              <div class="mr-4">{{ adminLogin.login }}</div>
+              <div
+                class="cursor-pointer text-slate-500 hover:text-slate-900"
+                @click="logout()"
+              >
+                <!-- Заменить иконкой -->
+                Выход
+              </div>
+            </div>
+            <div
+              v-else
+              class="cursor-pointer text-slate-500 hover:text-slate-900"
+              @click="goLogin()"
+            >
+              Вход
+            </div>
+          </Transition>
+        </template>
       </div>
     </div>
     <div class="club_w mx-auto -mt-16">
@@ -105,11 +133,15 @@ export default {
   },
   data() {
     return {
+      verification: true,
       app_version: __APP_VERSION__,
       activeLocaleClass: "text-indigo-500",
     };
   },
   computed: {
+    adminLogin() {
+      return this.$store.state.admin;
+    },
     locale() {
       return this.$i18n.locale;
     },
@@ -118,6 +150,9 @@ export default {
     },
   },
   methods: {
+    toCreateClub() {
+      // К странице создания клуба
+    },
     changeLocale(locale) {
       this.$i18n.locale = locale;
     },
@@ -125,8 +160,22 @@ export default {
       // SET REPLACE
       this.$router.push({ name: "Club_d", params: { id: idClub } });
     },
+    // ===
+    goLogin() {
+      this.$router.push({
+        name: "Login",
+      });
+    },
+    logout() {
+      this.$store.dispatch("logout").then(() => {
+        this.$router.replace({ name: "Login" });
+      });
+    },
   },
   mounted() {
+    this.$store.dispatch("verifyAuth", null).then(() => {
+      this.verification = false;
+    });
     this.$store.dispatch("getClubs");
   },
 };
@@ -135,5 +184,13 @@ export default {
 <style scoped>
 .club_w {
   min-width: 32rem;
+}
+.adm-enter-active {
+  transition: opacity 0.5s ease;
+}
+
+.adm-enter-from,
+.adm-leave-to {
+  opacity: 0;
 }
 </style>
