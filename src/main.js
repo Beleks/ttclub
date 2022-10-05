@@ -5,7 +5,6 @@ import store from "./store/index.js";
 import router from "./router";
 import "./index.css";
 
-
 import en from "./locales/en.json";
 import ru from "./locales/ru.json";
 

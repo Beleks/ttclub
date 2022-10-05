@@ -1,11 +1,17 @@
 <template>
   <div class="bg-slate-50 min-h-screen text-center">
+    <ReloadPrompt />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import ReloadPrompt from "./components/ReloadPrompt.vue";
+
 export default {
+  components: {
+    ReloadPrompt,
+  },
   data() {
     return {
       width: 0,
