@@ -2,58 +2,51 @@
   <div class="flex">
     <ClubSidebar :verification="verification" />
     <div class="w-full">
-      <div
-        class="
-          flex
-          items-center
-          justify-between
-          h-20
-          px-8
-          border-b-2 border-white
-        "
-      >
-        <template v-if="!verification">
-          <div>
+      <div class="border-b-2 border-white">
+        <div class="container-maxw flex items-center justify-between px-8 h-20">
+          <template v-if="!verification">
+            <div>
+              <Transition name="adm" mode="out-in" appear>
+                <div
+                  v-if="isAuth"
+                  class="
+                    bg-gray-400
+                    py-1
+                    px-3
+                    w-36
+                    rounded
+                    text-gray-300
+                    cursor-not-allowed
+                  "
+                >
+                  Создать
+                </div>
+                <div v-else class="text-gray-300">Вы вошли как гость</div>
+              </Transition>
+            </div>
             <Transition name="adm" mode="out-in" appear>
-              <div
-                v-if="isAuth"
-                class="
-                  bg-gray-400
-                  py-1
-                  px-3
-                  w-36
-                  rounded
-                  text-gray-300
-                  cursor-not-allowed
-                "
-              >
-                Создать
+              <div v-if="isAuth" class="flex">
+                <div class="mr-4">{{ adminLogin.login }}</div>
+                <div
+                  class="cursor-pointer text-slate-500 hover:text-slate-900"
+                  @click="logout()"
+                >
+                  <!-- Заменить иконкой -->
+                  Выход
+                </div>
               </div>
-              <div v-else class="text-gray-300">Вы вошли как гость</div>
-            </Transition>
-          </div>
-          <Transition name="adm" mode="out-in" appear>
-            <div v-if="isAuth" class="flex">
-              <div class="mr-4">{{ adminLogin.login }}</div>
               <div
+                v-else
                 class="cursor-pointer text-slate-500 hover:text-slate-900"
-                @click="logout()"
+                @click="goLogin()"
               >
-              <!-- Заменить иконкой -->
-                Выход
+                Вход
               </div>
-            </div>
-            <div
-              v-else
-              class="cursor-pointer text-slate-500 hover:text-slate-900"
-              @click="goLogin()"
-            >
-              Вход
-            </div>
-          </Transition>
-        </template>
+            </Transition>
+          </template>
+        </div>
       </div>
-      <div class="flex p-6 px-8">
+      <div class="flex p-6 px-8 container-maxw">
         <router-view></router-view>
       </div>
     </div>
@@ -114,6 +107,10 @@ export default {
 </script>
 
 <style scoped>
+.container-maxw {
+  margin: 0 auto;
+  max-width: 1200px;
+}
 .off {
   color: rgba(128, 128, 128, 0.5);
 }
