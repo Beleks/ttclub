@@ -67,7 +67,7 @@
         Добавить игрока
       </div>
       <div
-        class="bg-white px-3 py-1 mb-2 flex rounded"
+        class="bg-white py-2 px-3 rounded mt-3 flex justify-between"
         v-for="player in players"
         :key="player.id"
       >
