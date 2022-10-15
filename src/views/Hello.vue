@@ -10,7 +10,8 @@
         v {{ app_version }}
       </div>
       <div class="mt-2">
-        <span
+        <!-- move to another location -->
+        <!-- <span
           @click="changeLocale('en')"
           :class="{ [activeLocaleClass]: locale == 'en' }"
           >En</span
@@ -21,7 +22,7 @@
           :class="{ [activeLocaleClass]: locale == 'ru' }"
         >
           Ru
-        </span>
+        </span> -->
       </div>
     </div>
     <div v-if="clubs.length">

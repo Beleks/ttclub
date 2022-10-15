@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-4 text-left">Появиться в скором времени</div>
+  <div class="mt-4 text-left">Появится в скором времени</div>
 </template>
 
 <script>
