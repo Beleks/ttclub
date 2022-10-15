@@ -4,7 +4,7 @@
     <div class="flex justify-between items-center m-3">
       <div
         :class="{ ['opacity-0']: !chooseStage }"
-        class="left rounded bg-slate-200 px-2 py-0.5"
+        class="left rounded bg-slate-100 px-3 py-1"
         @click="stageChange(-1)"
       >
         <ArrowRight1Svg />
@@ -12,7 +12,7 @@
       <div>{{ stageTitle }}</div>
       <div
         :class="{ ['opacity-0']: chooseStage == stages.length - 1 }"
-        class="rounded bg-slate-200 px-2 py-0.5"
+        class="rounded bg-slate-100 px-3 py-1"
         @click="stageChange(1)"
       >
         <ArrowRight1Svg />
