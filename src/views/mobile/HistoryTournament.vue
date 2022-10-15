@@ -1,49 +1,41 @@
 <template>
-  <div class="pt-12">
+  <div class="py-14 p-3">
     <div v-if="!loaded">Загрузка турнира...</div>
     <div v-else>
-      <div class="flex justify-between items-center m-3">
+      <div class="flex mb-4">
         <div
-          :class="{ ['opacity-0']: !chooseStage }"
-          class="left rounded bg-slate-200 px-2 py-0.5"
-          @click="stageChange(-1)"
+          :class="[
+            'py-1 px-3 shadow-lg shadow-gray-100/50 rounded mr-3',
+            { [activeTabClass]: activeTab === tab },
+            { 'bg-white': activeTab !== tab },
+          ]"
+          v-for="tab in tabs"
+          :key="tab"
+          @click="changeTab(tab)"
         >
-          <ArrowRight1Svg />
-        </div>
-        <div>{{ stageTitle }}</div>
-        <div
-          :class="{
-            ['opacity-0']: chooseStage == tournament.stages.length - 1,
-          }"
-          class="rounded bg-slate-200 px-2 py-0.5"
-          @click="stageChange(1)"
-        >
-          <ArrowRight1Svg />
+          {{ $t(`${tab}`) }}
         </div>
       </div>
-      <div class="px-3">
-        <div v-for="(duel, index) in currentStage" :key="index" class="mb-3">
-          <TournamentDuelCard :duel="duel" />
-        </div>
-      </div>
+      <component :is="tabComponent" :tournament="tournament"></component>
     </div>
   </div>
 </template>
 
 <script>
-import HeaderTournament from "../../components/mobile/create/HeaderTournament.vue";
-import TournamentDuelCard from "../../components/mobile/history/TournamentDuelCard.vue";
-import ArrowRight1Svg from "../../components/svg/ArrowRight1Svg.vue";
+import TournamentGrid from "../../components/mobile/history/TournamentGrid.vue";
+import TournamentResult from "../../components/mobile/history/TournamentResult.vue";
 
 export default {
   components: {
-    HeaderTournament,
-    ArrowRight1Svg,
-    TournamentDuelCard,
+    TournamentGrid,
+    TournamentResult,
   },
   data() {
     return {
       loaded: false,
+      tabs: ["results", "grid"],
+      activeTab: "results",
+      activeTabClass: "bg-indigo-100 text-indigo-500",
     };
   },
   computed: {
@@ -53,44 +45,26 @@ export default {
     tournament() {
       return this.$store.getters.getTournamentById(this.idTournament);
     },
-    stageTitle() {
-      let stages = this.tournament.stages.length;
-      this.chooseStage;
-      let title = "";
-      switch (stages - this.chooseStage) {
-        case 1:
-          title = "Финал";
+    tabComponent() {
+      let tab = "";
+      switch (this.activeTab) {
+        case "results":
+          tab = "TournamentResult";
           break;
-        case 2:
-          title = "Полуфинал";
+
+        case "grid":
+          tab = "TournamentGrid";
           break;
+
         default:
-          title = `1/${Math.pow(2, stages - this.chooseStage - 1)}`;
           break;
       }
-      return title;
-    },
-    chooseStage() {
-      return Number(this.$route.query.stage);
-    },
-    currentStage() {
-      return this.tournament.stages[this.chooseStage];
+      return tab;
     },
   },
   methods: {
-    stageChange(step) {
-      if (
-        this.chooseStage + step >= this.tournament.stages.length ||
-        this.chooseStage + step < 0
-      ) {
-        return;
-      } else {
-        let currentPath = this.$route.path;
-        this.$router.replace({
-          path: currentPath,
-          query: { stage: Number(this.$route.query.stage) + step },
-        });
-      }
+    changeTab(tab) {
+      this.activeTab = tab;
     },
   },
   watch: {
@@ -111,10 +85,4 @@ export default {
 </script>
 
 <style scoped>
-.left {
-  transform: rotate(180deg);
-}
-.button-calc {
-  width: calc(100% - 1.5rem);
-}
 </style>

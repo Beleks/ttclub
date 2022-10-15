@@ -22,7 +22,7 @@
             ]"
             v-for="tab in tabs"
             :key="tab"
-            @click="changeCategory(tab)"
+            @click="changeTab(tab)"
           >
             {{ $t(`${tab}`) }}
           </div>
@@ -83,7 +83,7 @@ export default {
     exit() {
       this.$router.back();
     },
-    changeCategory(tab) {
+    changeTab(tab) {
       this.activeTab = tab;
     },
   },
@@ -108,7 +108,4 @@ export default {
 .left {
   transform: rotate(180deg);
 }
-/* .button-calc {
-  width: calc(100% - 1.5rem);
-} */
 </style>
