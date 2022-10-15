@@ -1,9 +1,14 @@
 <template>
-  <div>Grid</div>
+  <div class="mt-4 text-left">Появиться в скором времени</div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    tournament: Object,
+  },
+  computed: {},
+};
 </script>
 
 <style>

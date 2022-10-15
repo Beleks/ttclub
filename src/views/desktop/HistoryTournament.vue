@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w-full">
     <div v-if="!loaded">Загрузка турнира ...</div>
     <div v-else>
       <div class="flex items-center text-lg font-normal">
@@ -27,10 +27,7 @@
             {{ $t(`${tab}`) }}
           </div>
         </div>
-        <div>
-          {{ tournament }}
-        </div>
-        <component :is="tabComponent"></component>
+        <component :is="tabComponent" :tournament="tournament"></component>
       </div>
     </div>
   </div>
