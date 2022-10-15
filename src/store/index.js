@@ -68,8 +68,10 @@ export default createStore({
     setClubTournaments(state, tournaments) {
       state.currentClub.history.tournaments = tournaments;
     },
-    setClubTournamentsInfo(state, { idTournament, stages }) {
-      state.currentClub.history.tournaments.find((tournament) => tournament.id == idTournament).stages = stages;
+    setClubTournamentsInfo(state, { idTournament, stages, results }) {
+      let tournament = state.currentClub.history.tournaments.find((tournament) => tournament.id == idTournament);
+      tournament.stages = stages;
+      tournament.results = results;
     },
 
     // record Duels, Tournaments into store
@@ -170,6 +172,56 @@ export default createStore({
         let duelsInStage = 1;
         let editedDuels = 0;
         let stages = data.data;
+        let results = [
+          {
+            place: "5-8",
+            id: 0,
+          },
+        ];
+
+        function calculateTournamentResult(stages) {
+          // Finding losers
+          let results = [];
+
+          stages.forEach((stage) => {
+            let place = "";
+
+            if (stage.length > 1) {
+              place = `${stage.length * 2 - stage.length + 1}-${stage.length * 2}`;
+              stage.forEach((duel) => {
+                let id = null;
+                let rating = null;
+
+                if (duel.score1 < duel.score2) {
+                  id = duel.id1;
+                  rating = duel.rating_first;
+                } else {
+                  id = duel.id2;
+                  rating = duel.rating_second;
+                }
+                results.unshift({
+                  place,
+                  id,
+                  rating,
+                });
+              });
+            } else {
+              results.unshift(
+                {
+                  place: "1",
+                  id: stage[0].score1 > stage[0].score2 ? stage[0].id1 : stage[0].id2,
+                  rating: stage[0].score1 > stage[0].score2 ? stage[0].rating_first : stage[0].rating_second,
+                },
+                {
+                  place: "2",
+                  id: stage[0].score2 > stage[0].score1 ? stage[0].id1 : stage[0].id2,
+                  rating: stage[0].score2 > stage[0].score1 ? stage[0].rating_first : stage[0].rating_second,
+                }
+              );
+            }
+          });
+          return results;
+        }
 
         // change keys
         stages.forEach((duel) => {
@@ -198,10 +250,12 @@ export default createStore({
 
         stages = duels;
         stages.reverse();
+        results = calculateTournamentResult(stages);
 
         commit("setClubTournamentsInfo", {
           idTournament,
           stages,
+          results,
         });
       });
     },
