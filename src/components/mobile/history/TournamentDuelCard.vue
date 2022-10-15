@@ -11,7 +11,12 @@
         :class="[duel.score1 > duel.score2 ? 'bg-indigo-100' : 'bg-white']"
       >
         <span> {{ players.p1.name }} {{ players.p1.surname }} </span>
-        <span>{{ Math.floor(duel.rating_first) }}</span>
+        <span v-if="duel.rating_first">
+          {{ Math.floor(duel.rating_first) }}
+        </span>
+        <span v-else>
+          {{ Math.floor(players.p1.rating) }}
+        </span>
       </div>
     </div>
     <div v-else class="flex">
@@ -50,7 +55,12 @@
         :class="[duel.score2 > duel.score1 ? 'bg-indigo-100' : 'bg-white']"
       >
         <span> {{ players.p2.name }} {{ players.p2.surname }} </span>
-        <span>{{ Math.floor(duel.rating_second) }}</span>
+        <span v-if="duel.rating_second">
+          {{ Math.floor(duel.rating_second) }}
+        </span>
+        <span v-else>
+          {{ Math.floor(players.p2.rating) }}
+        </span>
       </div>
     </div>
     <div v-else class="flex">
