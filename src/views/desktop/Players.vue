@@ -10,7 +10,12 @@
           <div class="ml-2 text-slate-500">Добавление новых игроков...</div>
         </div>
         <div
-          class="bg-indigo-500 py-1 px-6 w-36 rounded cursor-pointer text-white"
+          class="py-1 px-6 w-36 rounded"
+          :class="[
+            isFilled
+              ? 'bg-indigo-500 text-white cursor-pointer'
+              : 'bg-gray-400 text-gray-300',
+          ]"
           @click="createPlayer()"
         >
           Создать
@@ -105,6 +110,12 @@ export default {
     players() {
       return this.$store.state.currentClub.players;
     },
+    isFilled() {
+      // If one of them does not have name or surname filled in, it will return false
+      return !this.playerForCreated.some(
+        (player) => !player.name || !player.surname
+      );
+    },
   },
   methods: {
     toCreatePlayer() {
@@ -119,16 +130,18 @@ export default {
       });
     },
     createPlayer() {
-      this.$store
-        .dispatch("createPlayer", {
-          surname: this.playerForCreated[0].surname,
-          name: this.playerForCreated[0].name,
-          patronymic: this.playerForCreated[0].patronymic,
-        })
-        .then(() => {
-          // getPlayers
-          this.playerCreation = false;
-        });
+      if (this.isFilled) {
+        this.$store
+          .dispatch("createPlayer", {
+            surname: this.playerForCreated[0].surname,
+            name: this.playerForCreated[0].name,
+            patronymic: this.playerForCreated[0].patronymic,
+          })
+          .then(() => {
+            // getPlayers
+            this.playerCreation = false;
+          });
+      }
     },
     cancelCreation() {
       this.playerCreation = false;
