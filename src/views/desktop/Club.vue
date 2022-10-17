@@ -1,7 +1,7 @@
 <template>
   <div class="flex">
     <ClubSidebar :verification="verification" />
-    <div class="w-full">
+    <div class="ml-56 w-full">
       <div class="border-b-2 border-white">
         <div class="container-maxw flex items-center justify-between px-8 h-20">
           <template v-if="!verification">

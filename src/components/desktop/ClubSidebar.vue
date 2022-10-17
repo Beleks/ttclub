@@ -1,5 +1,18 @@
 <template>
-  <div class="w-60 bg-white h-screen pb-6 px-4 flex flex-col select-none">
+  <div
+    class="
+      w-56
+      bg-white
+      h-screnn
+      fixed
+      top-0
+      bottom-0
+      pb-6
+      px-4
+      flex flex-col
+      select-none
+    "
+  >
     <div class="text-2xl my-6 cursor-pointer" @click="goHome()">Club Title</div>
     <div v-if="!verification" class="mt-6">
       <TransitionGroup name="tab" appear>
