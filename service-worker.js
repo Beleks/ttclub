@@ -17,6 +17,9 @@
 import { offlineFallback } from "workbox-recipes";
 import { setDefaultHandler } from "workbox-routing";
 import { NetworkOnly } from "workbox-strategies";
+import { precacheAndRoute } from 'workbox-precaching'
+
+precacheAndRoute(self.__WB_MANIFEST)
 
 // Asset hashes to see if content has changed.
 const assetHashes = self.__WB_MANIFEST;
