@@ -132,9 +132,14 @@ export default createStore({
       let token = localStorage.getItem("clubToken");
 
       if (token) {
-        await api.requestToApiByAdmin("POST", "auth/me", JSON.parse(token)).then((data) => {
-          commit("verifyAuth", { isAuth: data.id == idClub, clubInfo: data });
-        });
+        await api
+          .requestToApiByAdmin("POST", "auth/me", JSON.parse(token))
+          .then((data) => {
+            commit("verifyAuth", { isAuth: data.id == idClub, clubInfo: data });
+          })
+          .catch(() => {
+            console.error('Ошибка авторизации; method: auth/me');
+          });
       }
     },
     async logout({ commit }) {
@@ -265,14 +270,12 @@ export default createStore({
       let token = localStorage.getItem("clubToken");
 
       await api.requestToApiByAdmin("POST", `create/player`, JSON.parse(token), player).then((data) => {
-        console.log("created");
       });
     },
     async editPlayer({ commit }, { idPlayer, player }) {
       let token = localStorage.getItem("clubToken");
 
       await api.requestToApiByAdmin("PATCH", `edit/player/${idPlayer}`, JSON.parse(token), player).then((data) => {
-        console.log("created");
       });
     },
 
@@ -280,7 +283,6 @@ export default createStore({
       let token = localStorage.getItem("clubToken");
 
       await api.requestToApiByAdmin("POST", `create/duel`, JSON.parse(token), duel).then((data) => {
-        console.log("created");
       });
     },
 
