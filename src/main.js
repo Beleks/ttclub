@@ -7,6 +7,8 @@ import "./index.css";
 
 import en from "./locales/en.json";
 import ru from "./locales/ru.json";
+// import Toaster from "./plugins/toast"; TODO: написать свой плагин
+// import Toaster from "@meforma/vue-toaster";
 
 // ! add export
 const i18n = createI18n({
@@ -18,3 +20,4 @@ const i18n = createI18n({
 });
 
 createApp(App).use(router).use(store).use(i18n).mount("#app");
+// .use(Toaster, { position: "top-right", useDefaultCss: false })
