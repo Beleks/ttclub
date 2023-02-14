@@ -74,7 +74,10 @@ import { authMixin } from "../../mixins/auth";
 
 export default {
   props: {
-    verification: Boolean,
+    verification: {
+      type: Boolean,
+      default: false,
+    },
   },
   mixins: [authMixin],
   components: {
