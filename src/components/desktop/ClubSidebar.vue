@@ -22,14 +22,14 @@
           :class="[
             menuItem.name.includes(activeMenuItem)
               ? 'bg-indigo-100 text-indigo-500 stroke-indigo-500 fill-indigo-500'
-              : 'stroke-slate-900',
+              : 'stroke-slate-500 fill-slate-500 text-slate-700',
 
             'flex cursor-pointer px-4 py-1 rounded mb-2',
           ]"
           @click="choseTab(menuItem.name[0])"
         >
-          <component :is="menuItem.svg"></component>
-          <div class="ml-2">
+          <component :is="menuItem.svg" :height="22" :width="22"></component>
+          <div class="ml-2 font-medium">
             <!-- translate menuItem ?-->
             {{ menuItem.title }}
           </div>

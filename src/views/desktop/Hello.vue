@@ -53,6 +53,7 @@
                   mr-6
                   transition
                   hover:bg-indigo-600
+                  font-medium
                 "
                 @click="toCreateClub()"
               >
@@ -64,7 +65,7 @@
             <div v-if="adminLogin.id" class="flex">
               <div class="mr-4">{{ adminLogin.login }}</div>
               <div
-                class="cursor-pointer text-slate-500 hover:text-slate-900"
+                class="cursor-pointer text-slate-500 hover:text-slate-900 font-medium"
                 @click="logout()"
               >
                 <!-- Заменить иконкой -->
@@ -73,7 +74,7 @@
             </div>
             <div
               v-else
-              class="cursor-pointer text-slate-500 hover:text-slate-900"
+              class="cursor-pointer text-slate-500 hover:text-slate-900 font-medium"
               @click="goLogin()"
             >
               Вход
@@ -83,7 +84,7 @@
       </div>
     </div>
     <div class="club_w mx-auto -mt-16">
-      <div class="mb-2">{{ $t("chooseClub") }}</div>
+      <div class="mb-2 font-medium">{{ $t("chooseClub") }}</div>
       <div class="mb-4">
         <div class="relative">
           <input

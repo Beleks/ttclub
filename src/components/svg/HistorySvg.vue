@@ -1,8 +1,8 @@
 <template>
   <div class="svg">
     <svg
-      width="18"
-      height="18"
+      :width="width"
+      :height="height"
       stroke="none"
       viewBox="0 0 18 18"
       xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +21,19 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "HistorySvg",
+  props: {
+    width: {
+      type: Number,
+      default: 18,
+    },
+    height: {
+      type: Number,
+      default: 18,
+    },
+  },
+};
 </script>
 
 <style>
