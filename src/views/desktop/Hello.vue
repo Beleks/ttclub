@@ -1,8 +1,19 @@
 <template>
-  <div class="flex h-screen flex-col justify-between py-8 px-14 bg-slate-50">
+  <div
+    class="
+      flex
+      h-screen
+      flex-col
+      justify-between
+      py-8
+      px-14
+      bg-slate-50
+      dark:bg-[#2f3136]
+    "
+  >
     <div class="flex justify-between items-center">
       <div class="flex items-center">
-        <div class="font-medium text-2xl font-bold">
+        <div class="font-medium text-2xl font-bold dark:text-[#ddd]">
           Club <span class="text-indigo-500">TT</span>
         </div>
         <div
@@ -11,6 +22,7 @@
             py-0.5
             px-4
             bg-indigo-100
+            dark:bg-[#383a3f]
             rounded
             text-sm text-indigo-500
             font-medium
@@ -35,9 +47,24 @@
             class="relative inline-flex rounded-full h-3 w-3 bg-indigo-400"
           ></span>
         </div>
-        <div class="ml-3 text-slate-600 font-bold">In development</div>
+        <div class="ml-3 text-slate-600 font-bold dark:text-[#8d8d8d]">
+          In development
+        </div>
       </div>
       <div class="flex items-center">
+        <div
+          class="
+            mr-6
+            cursor-pointer
+            transition
+            stroke-[#8d8d8d]
+            hover:stroke-[#ddd]
+          "
+          @click="changeColorTheme"
+        >
+          <SunSvg v-if="darkThemeOn" :height="24" :width="24" />
+          <MoonSvg v-else :height="24" :width="24" />
+        </div>
         <template v-if="!verification">
           <div>
             <Transition name="adm" mode="out-in" appear>
@@ -65,7 +92,14 @@
             <div v-if="adminLogin.id" class="flex">
               <div class="mr-4">{{ adminLogin.login }}</div>
               <div
-                class="cursor-pointer text-slate-500 hover:text-slate-900 font-medium"
+                class="
+                  transition
+                  cursor-pointer
+                  text-slate-500
+                  hover:text-slate-900
+                  font-medium
+                  dark:text-[#ddd] dark:hover:text-indigo-500
+                "
                 @click="logout()"
               >
                 <!-- Заменить иконкой -->
@@ -74,7 +108,14 @@
             </div>
             <div
               v-else
-              class="cursor-pointer text-slate-500 hover:text-slate-900 font-medium"
+              class="
+                transition
+                cursor-pointer
+                text-slate-500
+                hover:text-slate-900
+                font-medium
+                dark:text-[#ddd] dark:hover:text-indigo-500
+              "
               @click="goLogin()"
             >
               Вход
@@ -84,20 +125,25 @@
       </div>
     </div>
     <div class="club_w mx-auto -mt-16">
-      <div class="mb-2 font-medium">{{ $t("chooseClub") }}</div>
+      <div class="mb-2 font-medium dark:text-[#ddd]">
+        {{ $t("chooseClub") }}
+      </div>
       <div class="mb-4">
         <div class="relative">
           <input
             type="text"
             class="
               bg-white
+              dark:bg-[#383a3f]
               border border-gray-300
+              dark:border-[#1e1f22] dark:text-[#a6a7b3]
               rounded
               focus:ring-indigo-500 focus:border-indigo-500
               w-full
               px-4
               py-2
               pr-16
+              placeholder:text-[#8d8d8d]
             "
             placeholder="Поиск пока не пригодится"
           />
@@ -130,24 +176,45 @@
             px-4
             py-2
             mb-3
-            shadow-lg shadow-indigo-100/50
+            dark:border-[#1e1f22] dark:bg-[#383a3f]
+            transition
+            fill-[#ddd]
+            hover:fill-indigo-500
           "
           @click="chooseClub(club.id)"
         >
-          <div class="text-indigo-500">{{ club.name }}</div>
-          <ArrowRight1Svg class="fill-indigo-500" />
+          <div class="text-indigo-500 dark:text-[#ddd]">{{ club.name }}</div>
+          <ArrowRight1Svg class="" />
         </div>
       </div>
       <template v-else>
         <div
-          class="animate-pulse bg-slate-200 h-10 rounded px-4 py-2 mb-3"
+          class="
+            animate-pulse
+            dark:bg-[#79798025]
+            bg-slate-200
+            h-10
+            rounded
+            px-4
+            py-2
+            mb-3
+          "
         ></div>
         <div
-          class="animate-pulse bg-slate-200 h-10 rounded px-4 py-2 mb-3"
+          class="
+            animate-pulse
+            dark:bg-[#79798025]
+            bg-slate-200
+            h-10
+            rounded
+            px-4
+            py-2
+            mb-3
+          "
         ></div>
       </template>
     </div>
-    <div class="text-slate-400 mx-auto">
+    <div class="text-slate-400 mx-auto dark:text-[#8d8d8d]">
       By Aleksey Beletsky, Maxim Proidakov
     </div>
   </div>
@@ -156,11 +223,16 @@
 <script>
 import ArrowRight1Svg from "../../components/svg/ArrowRight1Svg.vue";
 import SearchSvg from "../../components/svg/SearchSvg.vue";
+import SunSvg from "../../components/svg/SunSvg.vue";
+// MoonSvg
+import MoonSvg from "../../components/svg/MoonSvg.vue";
 
 export default {
   components: {
     ArrowRight1Svg,
     SearchSvg,
+    SunSvg,
+    MoonSvg,
   },
   data() {
     return {
@@ -179,6 +251,9 @@ export default {
     clubs() {
       return this.$store.state.clubs;
     },
+    darkThemeOn() {
+      return this.$store.state.darkThemeOn;
+    },
   },
   methods: {
     toCreateClub() {
@@ -191,6 +266,10 @@ export default {
       // SET REPLACE
       this.$router.push({ name: "Club_d", params: { id: idClub } });
     },
+    changeColorTheme() {
+      this.$store.commit("changeColorTheme");
+    },
+
     // ===
     goLogin() {
       this.$router.push({

@@ -2,7 +2,7 @@
   <div class="flex">
     <ClubSidebar :verification="verification" />
     <div class="ml-56 w-full">
-      <div class="border-b-2 border-white">
+      <div class="border-b-2 border-white dark:border-[#1e1f22]">
         <div class="container-maxw flex items-center justify-between px-8 h-20">
           <template v-if="!verification">
             <div>
@@ -21,14 +21,21 @@
                 >
                   Создать
                 </div>
-                <div v-else class="text-gray-300">Вы вошли как гость</div>
+                <div v-else class="text-gray-300 dark:text-[#8d8d8d]">
+                  Вы вошли как гость
+                </div>
               </Transition>
             </div>
             <Transition name="adm" mode="out-in" appear>
               <div v-if="isAuth" class="flex">
                 <div class="mr-4">{{ adminLogin.login }}</div>
                 <div
-                  class="cursor-pointer text-slate-500 hover:text-slate-900"
+                  class="
+                    cursor-pointer
+                    text-slate-500
+                    hover:text-slate-900
+                    dark:text-[#8d8d8d] dark:hover:text-[#ddd]
+                  "
                   @click="logout()"
                 >
                   <!-- Заменить иконкой -->
@@ -37,7 +44,12 @@
               </div>
               <div
                 v-else
-                class="cursor-pointer text-slate-500 hover:text-slate-900"
+                class="
+                  cursor-pointer
+                  text-slate-500
+                  hover:text-slate-900
+                  dark:text-[#8d8d8d] dark:hover:text-[#ddd]
+                "
                 @click="goLogin()"
               >
                 Вход

@@ -1,6 +1,8 @@
 <template>
-  <div class="bg-slate-50 min-h-screen text-center">
-    <router-view></router-view>
+  <div :class="darkThemeOn ? 'dark' : 'light'">
+    <div class="bg-slate-50 min-h-screen text-center dark:bg-[#2f3136]">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -15,6 +17,9 @@ export default {
   computed: {
     text() {
       return this.$store.state.textFromState;
+    },
+    darkThemeOn() {
+      return this.$store.state.darkThemeOn;
     },
   },
   methods: {

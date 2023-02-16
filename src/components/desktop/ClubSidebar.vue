@@ -3,6 +3,7 @@
     class="
       w-56
       bg-white
+      dark:bg-[#242629]
       h-screnn
       fixed
       top-0
@@ -13,7 +14,7 @@
       select-none
     "
   >
-    <div class="text-2xl my-6 cursor-pointer" @click="goHome()">Club Title</div>
+    <div class="text-2xl my-6 cursor-pointer dark:text-[#ddd]" @click="goHome()">Club Title</div>
     <div v-if="!verification" class="mt-6">
       <TransitionGroup name="tab" appear>
         <div
@@ -21,8 +22,8 @@
           :key="menuItem.name[0]"
           :class="[
             menuItem.name.includes(activeMenuItem)
-              ? 'bg-indigo-100 text-indigo-500 stroke-indigo-500 fill-indigo-500'
-              : 'stroke-slate-500 fill-slate-500 text-slate-700',
+              ? 'bg-indigo-100 text-indigo-500 stroke-indigo-500 fill-indigo-500 dark:bg-[#383a3f] dark:fill-[#ddd] dark:text-[#ddd]'
+              : 'stroke-slate-500 fill-slate-500 text-slate-700 dark:fill-[#ddd] dark:text-[#ddd]',
 
             'flex cursor-pointer px-4 py-1 rounded mb-2',
           ]"
