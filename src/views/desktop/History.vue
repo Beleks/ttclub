@@ -2,12 +2,15 @@
   <div class="w-full">
     <template v-if="!anyDataHistory">Загрузка...</template>
     <template v-else>
-      <div class="flex mb-4">
+      <div class="flex mb-4 font-medium">
         <div
           :class="[
-            'py-1 px-3 w-36 cursor-pointer shadow-lg shadow-gray-100/50 rounded mr-3',
+            'py-1 px-3 w-36 cursor-pointer rounded mr-3 transition',
             { [activeCategoryClass]: activeCategory === category },
-            { 'bg-white': activeCategory !== category },
+            {
+              'dark:hover:bg-[#383a3f] dark:text-[#8d8d8d] text-[#8d8d8d] hover:bg-[#e5e7eb]':
+                activeCategory !== category,
+            },
           ]"
           v-for="category in categories"
           :key="category"
@@ -37,7 +40,8 @@ export default {
     return {
       categories: ["duels", "tournaments"],
       activeCategory: "duels",
-      activeCategoryClass: "bg-indigo-100 text-indigo-500",
+      activeCategoryClass:
+        "dark:bg-[#383a3f] dark:text-[#ddd] bg-[#e5e7eb] text-slate-700",
     };
   },
   computed: {

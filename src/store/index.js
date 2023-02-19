@@ -3,6 +3,7 @@ import api from "../api.js";
 
 export default createStore({
   state: {
+    darkThemeOn: true,
     admin: {
       id: null,
     },
@@ -38,6 +39,9 @@ export default createStore({
     },
   },
   mutations: {
+    changeColorTheme(state) {
+      state.darkThemeOn = !state.darkThemeOn;  
+    },
     verifyAuth(state, { isAuth, clubInfo }) {
       state.admin = clubInfo;
       state.isAuth = isAuth;
