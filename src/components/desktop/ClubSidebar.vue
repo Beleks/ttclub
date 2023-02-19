@@ -14,7 +14,12 @@
       select-none
     "
   >
-    <div class="text-2xl my-6 cursor-pointer dark:text-[#ddd]" @click="goHome()">Club Title</div>
+    <div
+      class="text-2xl my-6 cursor-pointer dark:text-[#ddd]"
+      @click="goHome()"
+    >
+      Club Title
+    </div>
     <div v-if="!verification" class="mt-6">
       <TransitionGroup name="tab" appear>
         <div
@@ -44,15 +49,15 @@
             :key="menuItem.name[0]"
             :class="[
               menuItem.name.includes(activeMenuItem)
-                ? 'bg-indigo-100 text-indigo-500 stroke-indigo-500 fill-indigo-500'
-                : 'stroke-slate-900',
+                ? 'bg-indigo-100 text-indigo-500 stroke-indigo-500 fill-indigo-500 dark:bg-[#383a3f] dark:stroke-[#ddd] dark:fill-[#ddd] dark:text-[#ddd]'
+                : 'stroke-slate-500 fill-slate-500 text-slate-700 dark:fill-[#ddd] dark:stroke-[#ddd] dark:text-[#ddd]',
 
               'flex cursor-pointer px-4 py-1 rounded mb-2',
             ]"
             @click="choseTab(menuItem.name[0])"
           >
-            <component :is="menuItem.svg"></component>
-            <div class="ml-2">
+            <component :is="menuItem.svg" :height="22" :width="22"></component>
+            <div class="ml-2 font-medium">
               <!-- translate menuItem ?-->
               {{ menuItem.title }}
             </div>

@@ -1,13 +1,13 @@
 <template>
-  <div class="w-full">
+  <div class="w-full dark:text-[#ddd]">
     <template v-if="playerCreation">
       <!-- created -->
       <div class="flex justify-between items-center mb-4">
         <div class="flex items-center">
           <div class="rotate-45 cursor-pointer" @click="cancelCreation()">
-            <CreateSvg class="fill-slate-900" />
+            <CreateSvg class="dark:fill-[#ddd]" />
           </div>
-          <div class="ml-2 text-slate-500">Добавление новых игроков...</div>
+          <div class="ml-2">Добавление новых игроков...</div>
         </div>
         <div
           class="py-1 px-6 w-36 rounded"
@@ -28,7 +28,18 @@
       >
         <div class="grow pr-4">
           <input
-            class="px-4 py-2 w-full"
+            class="
+              px-4
+              py-2
+              w-full
+              rounded
+              border
+              dark:bg-[#383a3f]
+              placeholder:text-[#8d8d8d]
+              dark:border-[#1e1f22]
+              focus:ring-indigo-500 focus:border-indigo-500
+              dark:focus:ring-indigo-500 dark:focus:border-indigo-500
+            "
             type="text"
             v-model="player.surname"
             placeholder="Фамилия*"
@@ -36,7 +47,18 @@
         </div>
         <div class="grow pr-4">
           <input
-            class="px-4 py-2 w-full"
+            class="
+              px-4
+              py-2
+              w-full
+              rounded
+              border
+              dark:bg-[#383a3f]
+              placeholder:text-[#8d8d8d]
+              dark:border-[#1e1f22]
+              focus:ring-indigo-500 focus:border-indigo-500
+              dark:focus:ring-indigo-500 dark:focus:border-indigo-500
+            "
             type="text"
             v-model="player.name"
             placeholder="Имя*"
@@ -44,7 +66,18 @@
         </div>
         <div class="grow">
           <input
-            class="px-4 py-2 w-full"
+            class="
+              px-4
+              py-2
+              w-full
+              rounded
+              border
+              dark:bg-[#383a3f]
+              placeholder:text-[#8d8d8d]
+              dark:border-[#1e1f22]
+              focus:ring-indigo-500 focus:border-indigo-500
+              dark:focus:ring-indigo-500 dark:focus:border-indigo-500
+            "
             type="text"
             v-model="player.patronymic"
             placeholder="Отчество"
@@ -63,12 +96,24 @@
         >
           Добавить игрока
         </div>
-        <div class="text-slate-600">{{ players.length }}/50</div>
+        <div class="text-[#8d8d8d]">{{ players.length }}/50</div>
       </div>
       <div
         v-for="player in players"
         :key="player.id"
-        class="group bg-white py-2 px-4 mb-3 flex justify-between"
+        class="
+          rounded
+          group
+          bg-white
+          py-2
+          px-4
+          mb-3
+          flex
+          justify-between
+          dark:bg-[#383a3f]
+          border
+          dark:border-[#1e1f22]
+        "
       >
         <div class="">
           {{ player.surname }} {{ player.name }} {{ player.patronymic }}
@@ -77,6 +122,7 @@
           <EditSvg
             class="
               stroke-slate-600
+              dark:stroke-[#ddd]
               group-hover:opacity-100
               opacity-0
               cursor-pointer

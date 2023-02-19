@@ -57,8 +57,9 @@
             mr-6
             cursor-pointer
             transition
+            hover:stroke-slate-900
             stroke-[#8d8d8d]
-            hover:stroke-[#ddd]
+            dark:hover:stroke-[#ddd]
           "
           @click="changeColorTheme"
         >
@@ -89,13 +90,12 @@
             </Transition>
           </div>
           <Transition name="adm" mode="out-in" appear>
-            <div v-if="adminLogin.id" class="flex">
+            <div v-if="adminLogin.id" class="flex text-[#8d8d8d]">
               <div class="mr-4">{{ adminLogin.login }}</div>
               <div
                 class="
                   transition
                   cursor-pointer
-                  text-slate-500
                   hover:text-slate-900
                   font-medium
                   dark:text-[#ddd] dark:hover:text-indigo-500
@@ -139,6 +139,7 @@
               dark:border-[#1e1f22] dark:text-[#a6a7b3]
               rounded
               focus:ring-indigo-500 focus:border-indigo-500
+              dark:focus:ring-indigo-500 dark:focus:border-indigo-500
               w-full
               px-4
               py-2
@@ -171,19 +172,21 @@
             flex
             justify-between
             cursor-pointer
-            bg-indigo-100
+            bg-white
             rounded
             px-4
             py-2
             mb-3
             dark:border-[#1e1f22] dark:bg-[#383a3f]
             transition
-            fill-[#ddd]
+            dark:fill-[#ddd]
             hover:fill-indigo-500
+            dark:hover:fill-indigo-500
+
           "
           @click="chooseClub(club.id)"
         >
-          <div class="text-indigo-500 dark:text-[#ddd]">{{ club.name }}</div>
+          <div class="dark:text-[#ddd]">{{ club.name }}</div>
           <ArrowRight1Svg class="" />
         </div>
       </div>

@@ -27,12 +27,11 @@
               </Transition>
             </div>
             <Transition name="adm" mode="out-in" appear>
-              <div v-if="isAuth" class="flex">
+              <div v-if="isAuth" class="flex text-[#8d8d8d]">
                 <div class="mr-4">{{ adminLogin.login }}</div>
                 <div
                   class="
                     cursor-pointer
-                    text-slate-500
                     hover:text-slate-900
                     dark:text-[#8d8d8d] dark:hover:text-[#ddd]
                   "
