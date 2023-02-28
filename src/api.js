@@ -8,7 +8,12 @@ const api = {
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((response) => response.json());
+    }).then((response) => {
+      if (response.status == 401) {
+        throw "Ошибка авторизации";
+      }
+      return response.json();
+    });
   },
 
   async requestToApiByAdmin(type, url, token, body) {
