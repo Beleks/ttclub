@@ -6,20 +6,10 @@
     <div class="flex items-center dark:text-[#ddd]">
       <div class="player-w flex items-center">
         <div
-          class="
-            flex
-            justify-between
-            bg-white
-            dark:bg-[#383a3f]
-            border
-            dark:border-[#1e1f22]
-            rounded
-            w-full
-            px-4
-            py-2
-            text-left
-          "
-          :class="[{ 'dark:border-b-indigo-500': isWinner }]"
+          class="flex justify-between bg-white dark:bg-[#383a3f] border dark:border-[#1e1f22] rounded w-full px-4 py-2 text-left"
+          :class="[
+            { 'dark:border-b-indigo-500 border-b-indigo-500': isWinner },
+          ]"
         >
           <span>{{ players.p1.surname }} {{ players.p1.name }}</span>
           <span>{{ Math.floor(item.rating_first) }}</span>
@@ -34,20 +24,10 @@
           {{ item.score_second }}
         </div>
         <div
-          class="
-            dark:text-[#ddd]
-            flex
-            justify-between
-            border
-            bg-white
-            dark:bg-[#383a3f] dark:border-[#1e1f22]
-            rounded
-            w-full
-            px-4
-            py-2
-            text-left
-          "
-          :class="[{ 'dark:border-b-indigo-500': !isWinner }]"
+          class="dark:text-[#ddd] flex justify-between border bg-white dark:bg-[#383a3f] dark:border-[#1e1f22] rounded w-full px-4 py-2 text-left"
+          :class="[
+            { 'dark:border-b-indigo-500 border-b-indigo-500': !isWinner },
+          ]"
         >
           <span>{{ players.p2.surname }} {{ players.p2.name }}</span>
           <span>{{ Math.floor(item.rating_second) }}</span>
