@@ -20,7 +20,7 @@ export default {
   mounted() {
     const idClub = this.getCurrentIdClub();
 
-    this.$store.dispatch("verifyAuth", idClub);
+    this.$store.dispatch("verifyAuth", idClub); // Зачем тут верификация ?
     this.$store.dispatch("getPlayers", idClub);
   },
 };

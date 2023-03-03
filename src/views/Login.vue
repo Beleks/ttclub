@@ -1,44 +1,35 @@
 <template>
   <div class="h-screen md:w-96 md:m-auto p-6 flex flex-col justify-between">
     <div>
-      <div class="text-2xl font-semibold">
-        <span class="text-indigo-500">TT</span> Club
+      <div class="text-2xl font-semibold dark:text-[#ddd]">
+        Club <span class="text-indigo-500">TT</span>
       </div>
-      <div class="mt-4 px-2 rounded text-indigo-500 w-max m-auto bg-indigo-200">
+      <!-- <div class="font-medium text-2xl font-bold dark:text-[#ddd]">
+        Club <span class="text-indigo-500">TT</span>
+      </div> -->
+      <!-- <div class="mt-4 px-2 rounded text-indigo-500 w-max m-auto bg-indigo-200">
         {{ app_version }}
-      </div>
+      </div> -->
       <div class="mt-12">
         <div class="mb-2">
-          <div class="text-left">Логин</div>
+          <div class="text-left dark:text-[#ddd]">Логин</div>
           <input
-            class="
-              py-1
-              px-2
-              border
-              rounded
-              focus:border-indigo-500 focus:outline-none
-            "
+            class="py-1 px-2 border rounded focus:border-indigo-500 focus:outline-none"
             type="text"
             v-model="login"
           />
         </div>
         <div class="mb-2">
-          <div class="text-left">Пароль</div>
+          <div class="text-left dark:text-[#ddd]">Пароль</div>
           <input
-            class="
-              py-1
-              px-2
-              border
-              rounded
-              focus:border-indigo-500 focus:outline-none
-            "
+            class="py-1 px-2 border rounded focus:border-indigo-500 focus:outline-none"
             type="password"
             v-model="password"
           />
         </div>
       </div>
       <div
-        class="mt-6 w-max m-auto underline cursor-pointer"
+        class="mt-6 w-max m-auto underline cursor-pointer dark:text-[#ddd]"
         @click="loginAsGuest()"
       >
         Войти как гость
@@ -47,14 +38,7 @@
     <div>
       <!-- + Ошбика входа -->
       <div
-        class="
-          md:w-80 md:m-auto
-          cursor-pointer
-          text-slate-100
-          bg-indigo-500
-          py-2
-          rounded
-        "
+        class="md:w-80 md:m-auto cursor-pointer text-slate-100 bg-indigo-500 py-2 rounded"
         @click="loginAsAdmin()"
       >
         {{ status }}
@@ -91,6 +75,10 @@ export default {
         .then(() => {
           let id = this.$store.state.admin.id;
           this.$router.replace({ name: "Club", params: { id } });
+        })
+        .catch((error) => {
+          this.status = "Вход";
+          // Показать уведомление об ошибке
         });
     },
   },

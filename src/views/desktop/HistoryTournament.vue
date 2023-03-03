@@ -1,24 +1,27 @@
 <template>
-  <div class="w-full">
+  <div class="w-full dark:fill-[#ddd] dark:text-[#ddd]">
     <div v-if="!loaded">Загрузка турнира ...</div>
     <div v-else>
-      <div class="flex items-center text-lg font-normal">
+      <div class="flex items-center text-lg font-medium">
         <div class="left cursor-pointer mr-4" @click="exit()">
           <ArrowRight1Svg />
         </div>
         <div>Турнир от {{ tournament.created_at }}</div>
       </div>
       <div>
-        <div class="flex stroke-slate-900 mt-4 items-center">
+        <div class="flex stroke-slate-900 dark:stroke-[#ddd] mt-4 items-center">
           <UserSvg />
           <div class="ml-2">{{ tournament.number_participants }}</div>
         </div>
-        <div class="flex mt-6">
+        <div class="flex mt-6 font-medium">
           <div
             :class="[
-              'py-1 px-3 w-36 cursor-pointer shadow-lg shadow-gray-100/50 rounded mr-3',
+              'py-1 px-3 w-36 cursor-pointer rounded mr-3 transition',
               { [activeTabClass]: activeTab === tab },
-              { 'bg-white': activeTab !== tab },
+              {
+                'dark:hover:bg-[#383a3f] dark:text-[#8d8d8d] text-[#8d8d8d] hover:bg-[#e5e7eb]':
+                  activeTab !== tab,
+              },
             ]"
             v-for="tab in tabs"
             :key="tab"
@@ -52,7 +55,7 @@ export default {
       loaded: false,
       tabs: ["results", "grid"],
       activeTab: "results",
-      activeTabClass: "bg-indigo-100 text-indigo-500",
+      activeTabClass: "dark:bg-[#383a3f] dark:text-[#ddd] bg-[#e5e7eb] text-slate-700",
     };
   },
   computed: {

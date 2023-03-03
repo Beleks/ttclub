@@ -2,20 +2,21 @@
   <div
     class="
       flex
-      bg-white
       py-2
       px-4
       rounded
-      shadow-lg shadow-gray-100/50
       justify-between
       items-center
       cursor-pointer
+      border
+      bg-white
+      dark:bg-[#383a3f] dark:border-[#1e1f22] dark:fill-[#ddd] dark:text-[#ddd]
     "
   >
     <div class="flex items-center">
-      <CupSvg :size="32" :color="'#0F172A'" />
+      <CupSvg :size="32" />
       <div class="ml-2">Турнир от {{ item.created_at }}</div>
-      <span class="ml-4 text-slate-500"
+      <span class="ml-4 text-slate-500 dark:text-[#8d8d8d]"
         >Участников: {{ item.number_participants }}
       </span>
     </div>

@@ -3,6 +3,7 @@ import api from "../api.js";
 
 export default createStore({
   state: {
+    darkThemeOn: true,
     admin: {
       id: null,
     },
@@ -38,6 +39,9 @@ export default createStore({
     },
   },
   mutations: {
+    changeColorTheme(state) {
+      state.darkThemeOn = !state.darkThemeOn;  
+    },
     verifyAuth(state, { isAuth, clubInfo }) {
       state.admin = clubInfo;
       state.isAuth = isAuth;
@@ -123,10 +127,16 @@ export default createStore({
   },
   actions: {
     async loginAsAdmin({ commit }, params) {
-      await api.requestToApi("POST", "auth/login", params).then((data) => {
-        commit("setClubId", data.id);
-        localStorage.setItem("clubToken", JSON.stringify(data.access_token));
-      });
+      await api
+        .requestToApi("POST", "auth/login", params)
+        .then((data) => {
+          commit("setClubId", data.id);
+          localStorage.setItem("clubToken", JSON.stringify(data.access_token));
+        })
+        .catch((error) => {
+          console.error("Ошибка входа; method: auth/login");
+          throw error;
+        });
     },
     async verifyAuth({ commit }, idClub) {
       let token = localStorage.getItem("clubToken");
@@ -138,7 +148,7 @@ export default createStore({
             commit("verifyAuth", { isAuth: data.id == idClub, clubInfo: data });
           })
           .catch(() => {
-            console.error('Ошибка авторизации; method: auth/me');
+            console.error("Ошибка авторизации; method: auth/me");
           });
       }
     },
@@ -269,21 +279,18 @@ export default createStore({
     async createPlayer({ commit }, player) {
       let token = localStorage.getItem("clubToken");
 
-      await api.requestToApiByAdmin("POST", `create/player`, JSON.parse(token), player).then((data) => {
-      });
+      await api.requestToApiByAdmin("POST", `create/player`, JSON.parse(token), player).then((data) => {});
     },
     async editPlayer({ commit }, { idPlayer, player }) {
       let token = localStorage.getItem("clubToken");
 
-      await api.requestToApiByAdmin("PATCH", `edit/player/${idPlayer}`, JSON.parse(token), player).then((data) => {
-      });
+      await api.requestToApiByAdmin("PATCH", `edit/player/${idPlayer}`, JSON.parse(token), player).then((data) => {});
     },
 
     async createDuel({ commit }, duel) {
       let token = localStorage.getItem("clubToken");
 
-      await api.requestToApiByAdmin("POST", `create/duel`, JSON.parse(token), duel).then((data) => {
-      });
+      await api.requestToApiByAdmin("POST", `create/duel`, JSON.parse(token), duel).then((data) => {});
     },
 
     async createTournament({ state, commit }) {

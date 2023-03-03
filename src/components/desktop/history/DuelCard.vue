@@ -1,22 +1,15 @@
 <template>
   <div>
-    <div class="text-left mb-1 pl-4 text-xs text-slate-400">
+    <div class="text-left mb-1 pl-4 text-xs text-slate-400 dark:text-[#8d8d8d]">
       {{ item.created_at }}
     </div>
-    <div class="flex items-center">
+    <div class="flex items-center dark:text-[#ddd]">
       <div class="player-w flex items-center">
         <div
-          class="
-            flex
-            justify-between
-            bg-white
-            rounded
-            w-full
-            px-4
-            py-2
-            text-left
-          "
-          :class="[{ 'border-b-2 border-b-indigo-500': isWinner }]"
+          class="flex justify-between bg-white dark:bg-[#383a3f] border dark:border-[#1e1f22] rounded w-full px-4 py-2 text-left"
+          :class="[
+            { 'dark:border-b-indigo-500 border-b-indigo-500': isWinner },
+          ]"
         >
           <span>{{ players.p1.surname }} {{ players.p1.name }}</span>
           <span>{{ Math.floor(item.rating_first) }}</span>
@@ -25,23 +18,16 @@
           {{ item.score_first }}
         </div>
       </div>
-      <div class="w-14">vs</div>
+      <div class="w-14 opacity-50">vs</div>
       <div class="player-w flex items-center">
         <div :class="[{ 'text-indigo-500 font-medium': !isWinner }, 'mx-2']">
           {{ item.score_second }}
         </div>
         <div
-          class="
-            flex
-            justify-between
-            bg-white
-            rounded
-            w-full
-            px-4
-            py-2
-            text-left
-          "
-          :class="[{ 'border-b-2 border-b-indigo-500': !isWinner }]"
+          class="dark:text-[#ddd] flex justify-between border bg-white dark:bg-[#383a3f] dark:border-[#1e1f22] rounded w-full px-4 py-2 text-left"
+          :class="[
+            { 'dark:border-b-indigo-500 border-b-indigo-500': !isWinner },
+          ]"
         >
           <span>{{ players.p2.surname }} {{ players.p2.name }}</span>
           <span>{{ Math.floor(item.rating_second) }}</span>

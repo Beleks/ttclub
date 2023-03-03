@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <div class="px-2 flex justify-between items-center mb-3">
+    <div class="px-2 flex justify-between items-center mb-3 dark:text-[#ddd]">
       <div class="flex">
         <div class="w-8 text-center">№</div>
         <div class="ml-2 w-60 text-left">Игрок</div>
@@ -19,7 +19,16 @@
       <div
         v-for="n in 4"
         :key="n"
-        class="animate-pulse rounded bg-slate-200 py-2 px-2 mb-3 h-10"
+        class="
+          animate-pulse
+          dark:bg-[#79798025]
+          rounded
+          bg-slate-200
+          py-2
+          px-2
+          mb-3
+          h-10
+        "
       ></div>
     </div>
   </div>
